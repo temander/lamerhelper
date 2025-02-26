@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35818.85 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LamerHelper", "LamerHelper.csproj", "{3EB2EAC5-EA3E-4BE0-B165-2FF65DBC618E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3EB2EAC5-EA3E-4BE0-B165-2FF65DBC618E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EB2EAC5-EA3E-4BE0-B165-2FF65DBC618E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EB2EAC5-EA3E-4BE0-B165-2FF65DBC618E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EB2EAC5-EA3E-4BE0-B165-2FF65DBC618E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BA4A1ED3-DBDA-4F3D-828E-20450D1B31AF}
+	EndGlobalSection
+EndGlobal
