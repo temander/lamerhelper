@@ -27,9 +27,30 @@
 
             <TextBlock Text="Lamer Helper"
                    VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
+                   HorizontalAlignment="Left"
                    Foreground="White"
-                   FontSize="22"/>
+                   FontSize="22"
+                   Margin="20,0,0,0"/>
+
+            <StackPanel Grid.Row="1">
+                <RadioButton Content="Главная"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+
+                <RadioButton Content="Вторая"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+
+                <RadioButton Content="Третья"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+            </StackPanel>
         </Grid>
     </Border>
 </Window>
