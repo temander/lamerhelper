@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -59,6 +60,14 @@ namespace LamerHelper.MVVM.View
                 {
                     Console.WriteLine($"Не удалось удалить папку {dir}: {ex.Message}");
                 }
+            }
+        }
+
+        private void EventLogBtn_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            using (EventLog eventLog = new EventLog("Application"))
+            {
+                eventLog.Clear();
             }
         }
     }

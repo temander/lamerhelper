@@ -15,9 +15,13 @@
                    FontFamily="/Fonts/#Poppins"/>
 
         <StackPanel Orientation="Vertical">
-            <Button x:Name="TempBtn" Content="Очистить папку Temp"
+            <Button Content="Очистить папку Temp"
                     Width="440"
                     Height="36" Click="TempBtn_Click"/>
+
+            <Button Content="Очистить журнал событий"
+                    Width="440"
+                    Height="36" Click="EventLogBtn_Click"/>
 
             <Button Content="Тестовая кнопка для Layot"
                     Width="440"
