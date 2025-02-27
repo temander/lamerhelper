@@ -48,6 +48,7 @@ namespace LamerHelper.Modules.Optimization
                 catch (Exception ex)
                 {
                     // Обработка ошибки
+                    _ = ex;
                 }
             }
         }
@@ -63,6 +64,7 @@ namespace LamerHelper.Modules.Optimization
                 catch (Exception ex)
                 {
                     // Обработка ошибки
+                    _ = ex;
                 }
             }
         }

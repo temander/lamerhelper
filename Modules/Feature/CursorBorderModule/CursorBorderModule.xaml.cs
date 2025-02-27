@@ -42,7 +42,7 @@ namespace LamerHelper.Modules.Feature
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка при изменении реестра: {ex.Message}", "Фишка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Ошибка при изменении реестра: {ex.Message}", "Фишка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
