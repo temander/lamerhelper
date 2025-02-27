@@ -3,6 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Height="Auto" Width="Auto">
 	<Grid>
-		<Button Content="Настроить обводку курсора" Click="Button_Click" Style="{StaticResource CustomButtonStyle}" />
+        <Button Content="Открыть меню" Height="26" Click="Button_Click" Style="{StaticResource CustomButtonStyle}" />
 	</Grid>
 </UserControl>
