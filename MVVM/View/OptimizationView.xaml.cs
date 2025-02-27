@@ -70,5 +70,10 @@ namespace LamerHelper.MVVM.View
                 eventLog.Clear();
             }
         }
+
+        private void DNSClearBtn_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Process.Start("ipconfig", "/flushdns");
+        }
     }
 }

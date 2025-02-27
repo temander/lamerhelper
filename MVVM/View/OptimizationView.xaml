@@ -23,6 +23,10 @@
                     Width="440"
                     Height="36" Click="EventLogBtn_Click"/>
 
+            <Button Content="Очистить кэш DNS для скорости интернета"
+                    Width="440"
+                    Height="36" Click="DNSClearBtn_Click"/>
+            
             <Button Content="Тестовая кнопка для Layot"
                     Width="440"
                     Height="36"/>
