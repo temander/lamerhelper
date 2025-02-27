@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using LamerHelper.Modules;
+using Microsoft.Win32;
 
 namespace LamerHelper.Modules.Feature
 {
@@ -19,7 +21,29 @@ namespace LamerHelper.Modules.Feature
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Открыт диалог настройки выделения мыши", "Фишка", MessageBoxButton.OK, MessageBoxImage.Information);
+            // TODO: сделать выбор цвета
+            ChangeValue("HotTrackingColor", "255 0 0"); // обводка
+            ChangeValue("Hilight", "210 0 0"); // панель
+
+            MessageBox.Show("Новый цвет применился! Перезапустите Windows, чтобы изменения вступили в силу.", "Фишка", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void ChangeValue(string valueName, string newValue)
+        {
+            try
+            {
+                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Colors", true))
+                {
+                    if (key != null)
+                    {
+                        key.SetValue(valueName, newValue);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при изменении реестра: {ex.Message}", "Фишка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
