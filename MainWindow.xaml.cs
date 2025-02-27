@@ -87,7 +87,7 @@ namespace LamerHelper
                     Grid.SetColumn(info, 1);
 
                     UserControl control = module.GetModuleControl();
-                    control.Margin = new Thickness(0, 10, 0, 0);
+                    control.Margin = new Thickness(0, 2, 0, 0);
 
                     grid.Children.Add(header);
                     grid.Children.Add(info);
