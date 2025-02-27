@@ -58,17 +58,42 @@ namespace LamerHelper
                         CornerRadius = new CornerRadius(8)
                     };
 
+                    Grid grid = new Grid();
+                    grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                    grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
                     TextBlock header = new TextBlock
                     {
                         Text = module.DisplayName,
                         FontSize = 16,
                         Foreground = System.Windows.Media.Brushes.White,
-                        Margin = new Thickness(0, 0, 0, 5)
+                        Margin = new Thickness(0, 0, 0, 5),
+                        VerticalAlignment = VerticalAlignment.Center
                     };
+                    Grid.SetColumn(header, 0);
+
+                    Button info = new Button
+                    {
+                        Content = "?",
+                        FontSize = 16,
+                        Width = 24,
+                        Height = 24,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        HorizontalAlignment = HorizontalAlignment.Right,
+                        Tag = module
+                    };
+                    info.Click += InfoButton_Click;
+
+                    Grid.SetColumn(info, 1);
 
                     UserControl control = module.GetModuleControl();
+                    control.Margin = new Thickness(0, 10, 0, 0);
+
+                    grid.Children.Add(header);
+                    grid.Children.Add(info);
+
                     StackPanel modulePanel = new StackPanel();
-                    modulePanel.Children.Add(header);
+                    modulePanel.Children.Add(grid);
                     modulePanel.Children.Add(control);
 
                     border.Child = modulePanel;
@@ -85,6 +110,12 @@ namespace LamerHelper
             {
                 NavigationListBox.SelectedIndex = 0;
             }
+        }
+
+        // Обработчик нажатия на кнопку информации
+        private void InfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show($"Тестовая инфа!", "Информация");
         }
 
         // Обработчик переключения категорий в навигации с анимацией

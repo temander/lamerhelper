@@ -7,6 +7,7 @@ namespace LamerHelper.Modules
         public abstract string ModuleName { get; }
         public abstract string DisplayName { get; }
         public abstract string Category { get; }
+        public abstract string Description { get; }
         public virtual UserControl GetModuleControl() => this;
     }
 }

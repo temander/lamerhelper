@@ -15,6 +15,7 @@ namespace LamerHelper.Modules.Optimization
         public string ModuleName => "ClearDNSModule";
         public string DisplayName => "Очистить DNS кэш";
         public string Category => "Оптимизация";
+        public string Description => "Temp - это временные файлы, что создаются самой Windows и процессами по ходу работы компьютера. С течением времени они могут копиться и достигать нескольких ГБайт.";
         public UserControl GetModuleControl() => this;
 
         private void Button_Click(object sender, RoutedEventArgs e)

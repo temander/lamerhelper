@@ -14,6 +14,7 @@ namespace LamerHelper.Modules.Feature
         public string ModuleName => "CursorBorderModule";
         public string DisplayName => "Настройка цвета выделения мыши";
         public string Category => "Фишка";
+        public string Description => "Позволяет изменить цвет панели выделения, что появляется при нажатии ЛКМ и перемещении мыши.";
         public UserControl GetModuleControl() => this;
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -7,7 +7,7 @@ namespace LamerHelper.Modules
         string ModuleName { get; }
         string DisplayName { get; }
         string Category { get; }
-
+        string Description { get; }
         UserControl GetModuleControl();
     }
 }

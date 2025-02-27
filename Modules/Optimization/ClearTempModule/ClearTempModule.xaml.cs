@@ -17,6 +17,7 @@ namespace LamerHelper.Modules.Optimization
         public string ModuleName => "ClearTempModule";
         public string DisplayName => "Очистить папку Temp";
         public string Category => "Оптимизация";
+        public string Description => "Удаляет кэш DNS, для получения новых данных. Может помочь при проблемах с доступам, таких как 'Невозможно установить соединение'. Также предотвращает возможные конфликты из-за различий DNS-информации от разных сетей.";
         public UserControl GetModuleControl() => this;
 
         private void Button_Click(object sender, RoutedEventArgs e)
