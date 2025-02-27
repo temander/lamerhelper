@@ -4,11 +4,11 @@ using System.Windows.Controls;
 namespace LamerHelper.MVVM.View
 {
     /// <summary>
-    /// Логика взаимодействия для HomeView.xaml
+    /// Логика взаимодействия для TweaksView.xaml
     /// </summary>
-    public partial class HomeView : UserControl
+    public partial class TweaksView : UserControl
     {
-        public HomeView()
+        public TweaksView()
         {
             InitializeComponent();
         }

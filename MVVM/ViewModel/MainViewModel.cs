@@ -7,10 +7,12 @@ namespace LamerHelper.MVVM.ViewModel
     {
         public RelayCommand HomeViewCommand { get; set; }
         public RelayCommand OptimizationViewCommand { get; set; }
+        public RelayCommand TweaksViewCommand { get; set; }
 
 
         public HomeViewModel HomeVM { get; set; }
         public OptimizationViewModel OptVM { get; set; }
+        public TweaksViewModel TweaksVM { get; set; }
 
         private object _currentView;
 
@@ -27,6 +29,7 @@ namespace LamerHelper.MVVM.ViewModel
         {
             HomeVM = new HomeViewModel();
             OptVM = new OptimizationViewModel();
+            TweaksVM = new TweaksViewModel();
 
             CurrentView = HomeVM;
 
@@ -38,6 +41,11 @@ namespace LamerHelper.MVVM.ViewModel
             OptimizationViewCommand = new RelayCommand(o =>
             {
                 CurrentView = OptVM;
+            });
+
+            TweaksViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = TweaksVM;
             });
         }
     }

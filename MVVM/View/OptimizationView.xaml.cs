@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LamerHelper.MVVM.View
 {
@@ -23,6 +13,53 @@ namespace LamerHelper.MVVM.View
         public OptimizationView()
         {
             InitializeComponent();
+        }
+
+        private void TempBtn_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            string tempPath = Path.GetTempPath();
+
+            try
+            {
+                Task.WaitAll(
+                    Task.Run(() => DeleteFiles(tempPath)),
+                    Task.Run(() => DeleteDirectories(tempPath))
+                );
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка при очистке папки %temp%: {ex.Message}");
+            }
+        }
+
+        static void DeleteFiles(string path)
+        {
+            foreach (var file in Directory.EnumerateFiles(path))
+            {
+                try
+                {
+                    File.Delete(file);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Не удалось удалить файл {file}: {ex.Message}");
+                }
+            }
+        }
+
+        static void DeleteDirectories(string path)
+        {
+            foreach (var dir in Directory.EnumerateDirectories(path))
+            {
+                try
+                {
+                    Directory.Delete(dir, true);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Не удалось удалить папку {dir}: {ex.Message}");
+                }
+            }
         }
     }
 }

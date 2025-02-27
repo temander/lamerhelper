@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="LamerHelper.MVVM.View.OptimizationView"
+﻿<UserControl x:Class="LamerHelper.MVVM.View.TweaksView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,21 +7,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
-        <TextBlock Text="Оптимизация страница"
+        <TextBlock Text="Фишки страница"
                    Foreground="White"
                    FontSize="28"
                    HorizontalAlignment="Left"
                    Margin="0,0,0,20"
                    FontFamily="/Fonts/#Poppins"/>
 
-        <StackPanel Orientation="Vertical">
-            <Button x:Name="TempBtn" Content="Очистить папку Temp"
-                    Width="440"
-                    Height="36" Click="TempBtn_Click"/>
-
-            <Button Content="Тестовая кнопка для Layot"
-                    Width="440"
-                    Height="36"/>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Здесь должна быть всякие фишки"
+                       Foreground="White"
+                       FontFamily="/Fonts/#Poppins"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

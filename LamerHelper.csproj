@@ -69,6 +69,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MVVM\View\TweaksView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MVVM\View\OptimizationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -89,7 +93,11 @@
   <ItemGroup>
     <Compile Include="MVVM\ViewModel\HomeViewModel.cs" />
     <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\TweaksViewModel.cs" />
     <Compile Include="MVVM\ViewModel\OptimizationViewModel.cs" />
+    <Compile Include="MVVM\View\TweaksView.xaml.cs">
+      <DependentUpon>TweaksView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\OptimizationView.xaml.cs">
       <DependentUpon>OptimizationView.xaml</DependentUpon>
     </Compile>
