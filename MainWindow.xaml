@@ -6,8 +6,7 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
-        WindowStartupLocation="CenterScreen"
-        >
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -15,7 +14,7 @@
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" Background="{StaticResource SecondaryBackground}" CornerRadius="8 8 0 0">
-            <Grid  MouseDown="TitleBar_MouseDown">
+            <Grid MouseDown="TitleBar_MouseDown">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="40"/>
                     <ColumnDefinition Width="*"/>
@@ -30,9 +29,40 @@
                            VerticalAlignment="Center"
                            FontSize="16"
                            Foreground="White"/>
+
                 <Button Grid.Column="2"
+                        Width="32"
+                        Height="32"
                         Click="CloseButton_Click"
-                        Background="Transparent">
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Padding="0"
+                        Cursor="Hand">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="Transparent"
+                                                CornerRadius="4">
+                                            <Image x:Name="CloseImage"
+                                                   Source="/Images/close_btn.png"
+                                                   Stretch="Uniform"
+                                                   Opacity="0.8"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="CloseImage" Property="Opacity" Value="1"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="CloseImage" Property="Opacity" Value="0.6"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
                 </Button>
             </Grid>
         </Border>

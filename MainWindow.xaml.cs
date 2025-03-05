@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace LamerHelper
@@ -68,8 +69,10 @@ namespace LamerHelper
                         Content = "?",
                         FontSize = 16,
                         Width = 24,
+                        Foreground = Brushes.Gray,
                         VerticalAlignment = VerticalAlignment.Center,
                         HorizontalAlignment = HorizontalAlignment.Right,
+                        Style = (Style)FindResource("CustomButtonStyle"),
                         Tag = module
                     };
                     info.Click += InfoButton_Click;
