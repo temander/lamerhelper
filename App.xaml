@@ -3,13 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <!-- Основные цвета -->
         <SolidColorBrush x:Key="PrimaryBackground" Color="#1E1E1E"/>
-        <!-- общий фон -->
         <SolidColorBrush x:Key="SecondaryBackground" Color="#2D2D30"/>
-        <!-- панели, навигация -->
         <SolidColorBrush x:Key="AccentColor" Color="#2e57bf"/>
-        <!-- акценты -->
 
         <!-- Кастомный стиль для кнопок -->
         <Style x:Key="CustomButtonStyle" TargetType="Button">

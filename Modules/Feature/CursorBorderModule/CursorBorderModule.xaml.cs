@@ -17,9 +17,9 @@ namespace LamerHelper.Modules.Feature
             colorComboBox.ItemsSource = new ComboBoxColorBorder[]
             {
                 new ComboBoxColorBorder { Name = "Стандартный", StrokeColor = "0 120 215", BorderColor = "0 102 204" },
-                new ComboBoxColorBorder { Name = "Красный", StrokeColor = "210 0 0", BorderColor = "255 0 0" },
-                new ComboBoxColorBorder { Name = "Зелёный", StrokeColor = "0 210 0", BorderColor = "0 255 0" },
-                new ComboBoxColorBorder { Name = "Синий", StrokeColor = "0 0 210", BorderColor = "0 0 255" },
+                new ComboBoxColorBorder { Name = "Красный", StrokeColor = "240 0 0", BorderColor = "255 0 0" },
+                new ComboBoxColorBorder { Name = "Зелёный", StrokeColor = "0 240 0", BorderColor = "0 255 0" },
+                new ComboBoxColorBorder { Name = "Синий", StrokeColor = "0 0 240", BorderColor = "0 0 255" },
                 new ComboBoxColorBorder { Name = "Кастомный цвет", StrokeColor = "custom", BorderColor = "" }
             };
             colorComboBox.SelectedIndex = 0;
@@ -62,7 +62,6 @@ namespace LamerHelper.Modules.Feature
                 string customColor = customColorTextBox.Text;
                 if (IsValidColor(customColor))
                 {
-                    // Преобразуем цвет в нужный формат (без запятых и с одним пробелом между числами)
                     strokeColor = NormalizeColor(customColor);
                     borderColor = strokeColor;
                 }
@@ -79,16 +78,13 @@ namespace LamerHelper.Modules.Feature
             MessageBox.Show("Новый цвет применился! Перезапустите Windows, чтобы изменения вступили в силу.", "Фишка", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        // Проверка корректности цвета
         private bool IsValidColor(string color)
         {
             try
             {
-                // Разделяем строку на числа, игнорируя пробелы и запятые
                 var parts = color.Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
                 if (parts.Length != 3) return false;
 
-                // Парсим числа и проверяем диапазон
                 int r = int.Parse(parts[0]);
                 int g = int.Parse(parts[1]);
                 int b = int.Parse(parts[2]);
@@ -101,21 +97,18 @@ namespace LamerHelper.Modules.Feature
             }
         }
 
-        // Преобразование цвета в нужный формат (без запятых и с одним пробелом между числами)
         private string NormalizeColor(string color)
         {
             var parts = color.Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
             return string.Join(" ", parts);
         }
 
-        // Обновление отображения цвета
         private void UpdateColorPreview(string color)
         {
             try
             {
                 if (IsValidColor(color))
                 {
-                    // Преобразуем цвет в нужный формат для отображения
                     string normalizedColor = NormalizeColor(color);
                     var parts = normalizedColor.Split(' ');
                     byte r = byte.Parse(parts[0]);
@@ -127,13 +120,11 @@ namespace LamerHelper.Modules.Feature
                 }
                 else
                 {
-                    // Если цвет некорректен, сбрасываем отображение
                     colorPreview.Background = Brushes.Transparent;
                 }
             }
             catch
             {
-                // В случае ошибки сбрасываем отображение
                 colorPreview.Background = Brushes.Transparent;
             }
         }
