@@ -23,6 +23,12 @@
       "DisplayName": "Создание QR-кода из любой ссылки",
       "Category": "Фишка",
       "Type": "LamerHelper.Modules.Feature.QrCreatorModule"
+    },
+    {
+      "ModuleName": "CacheDeleteModule",
+      "DisplayName": "Удалить кэш обновлений windows",
+      "Category": "Оптимизация",
+      "Type": "LamerHelper.Modules.Optimization.CacheDeleteModule"
     }
   ]
 }
