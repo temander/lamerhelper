@@ -1,0 +1,22 @@
+{
+  "Modules": [
+    {
+      "ModuleName": "ClearDNSModule",
+      "DisplayName": "Очистить DNS кэш",
+      "Category": "Оптимизация",
+      "Type": "LamerHelper.Modules.Optimization.ClearDNSModule"
+    },
+    {
+      "ModuleName": "ClearTempModule",
+      "DisplayName": "Очистить папку Temp",
+      "Category": "Оптимизация",
+      "Type": "LamerHelper.Modules.Optimization.ClearTempModule"
+    },
+    {
+      "ModuleName": "CursorBorderModule",
+      "DisplayName": "Настройка цвета выделения мыши",
+      "Category": "Фишка",
+      "Type": "LamerHelper.Modules.Feature.CursorBorderModule"
+    }
+  ]
+}
