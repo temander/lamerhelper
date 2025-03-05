@@ -33,7 +33,7 @@ namespace LamerHelper
 
         private void LoadModules()
         {
-            string configPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules", "ModuleConfig.json");
+            string configPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ModuleConfig.json");
             List<IModule> modules = ModuleLoader.LoadModules(configPath);
 
             // Группируем модули по категориям

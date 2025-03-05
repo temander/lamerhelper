@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace LamerHelper.Modules
@@ -52,7 +53,7 @@ namespace LamerHelper.Modules
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine($"Error loading module {moduleInfo.ModuleName}: {ex.Message}");
+                    MessageBox.Show($"Ошибка загрузки модуля {moduleInfo.ModuleName}: {ex.Message}", "Модуль", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             return modules;
