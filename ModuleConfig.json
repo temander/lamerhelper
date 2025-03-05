@@ -17,6 +17,12 @@
       "DisplayName": "Настройка цвета выделения мыши",
       "Category": "Фишка",
       "Type": "LamerHelper.Modules.Feature.CursorBorderModule"
+    },
+    {
+      "ModuleName": "QrCreatorModule",
+      "DisplayName": "Создание QR-кода из любой ссылки",
+      "Category": "Фишка",
+      "Type": "LamerHelper.Modules.Feature.QrCreatorModule"
     }
   ]
 }
