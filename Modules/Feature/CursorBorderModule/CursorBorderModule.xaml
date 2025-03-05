@@ -3,9 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Height="Auto" Width="Auto">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -13,11 +10,12 @@
 
         <ComboBox x:Name="colorComboBox"
                   Grid.Column="0"
-                  Grid.Row="0"
-                  FontSize="16"/>
-        <Button Grid.Column="1" Grid.Row="0"
+                  FontSize="16"
+                  Height="30"/>
+        <Button Grid.Column="1"
                 Content="Изменить цвет"
-                Height="20"
-                Click="Button_Click" Style="{StaticResource CustomButtonStyle}" />
+                Height="26"
+                Click="Button_Click"
+                Style="{StaticResource CustomButtonStyle}" />
     </Grid>
 </UserControl>

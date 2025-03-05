@@ -62,7 +62,7 @@ namespace LamerHelper.Modules.Feature
             public string StrokeColor { get; set; } = "";
             public string BorderColor { get; set; } = "";
 
-            public override string ToString() => $"{Name} ({StrokeColor})";
+            public override string ToString() => $"{Name} (rgb {StrokeColor})";
         }
     }
 }

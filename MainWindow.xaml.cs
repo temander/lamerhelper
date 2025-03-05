@@ -42,22 +42,13 @@ namespace LamerHelper
             {
                 ScrollViewer scrollViewer = new ScrollViewer
                 {
-                    VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-                    Background = (System.Windows.Media.Brush)FindResource("PrimaryBackground")
+                    VerticalScrollBarVisibility = ScrollBarVisibility.Auto
                 };
 
                 StackPanel stackPanel = new StackPanel { Margin = new Thickness(10) };
 
                 foreach (var module in group)
                 {
-                    Border border = new Border
-                    {
-                        Background = (System.Windows.Media.Brush)FindResource("SecondaryBackground"),
-                        Margin = new Thickness(5),
-                        Padding = new Thickness(10),
-                        CornerRadius = new CornerRadius(8)
-                    };
-
                     Grid grid = new Grid();
                     grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
                     grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
@@ -67,7 +58,7 @@ namespace LamerHelper
                         Text = module.DisplayName,
                         FontSize = 16,
                         Foreground = System.Windows.Media.Brushes.White,
-                        Margin = new Thickness(0, 0, 0, 5),
+                        Margin = new Thickness(0, 0, 0, 6),
                         VerticalAlignment = VerticalAlignment.Center
                     };
                     Grid.SetColumn(header, 0);
@@ -77,27 +68,24 @@ namespace LamerHelper
                         Content = "?",
                         FontSize = 16,
                         Width = 24,
-                        Height = 24,
                         VerticalAlignment = VerticalAlignment.Center,
                         HorizontalAlignment = HorizontalAlignment.Right,
                         Tag = module
                     };
                     info.Click += InfoButton_Click;
-
                     Grid.SetColumn(info, 1);
 
                     UserControl control = module.GetModuleControl();
-                    control.Margin = new Thickness(0, 2, 0, 0);
+                    control.Margin = new Thickness(0, 4, 0, 0);
 
                     grid.Children.Add(header);
                     grid.Children.Add(info);
 
-                    StackPanel modulePanel = new StackPanel();
+                    StackPanel modulePanel = new StackPanel { Margin = new Thickness(8) };
                     modulePanel.Children.Add(grid);
                     modulePanel.Children.Add(control);
 
-                    border.Child = modulePanel;
-                    stackPanel.Children.Add(border);
+                    stackPanel.Children.Add(modulePanel);
                 }
                 scrollViewer.Content = stackPanel;
 
@@ -117,10 +105,10 @@ namespace LamerHelper
         {
             Button currentBtn = sender as Button;
             Grid parentBtn = currentBtn.Parent as Grid;
-            StackPanel parentGrid = parentBtn.Parent as StackPanel;
-            ModuleBase btnModule = parentGrid.Children[1] as ModuleBase;
+            StackPanel parentStack = parentBtn.Parent as StackPanel;
+            IModule btnModule = parentStack.Children[1] as IModule;
 
-            MessageBox.Show(btnModule.Description, "Информация");
+            MessageBox.Show($"{btnModule.Description}", "Информация");
         }
 
         // Обработчик переключения категорий в навигации с анимацией
