@@ -4,18 +4,50 @@
              Height="Auto" Width="Auto">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
         <ComboBox x:Name="colorComboBox"
                   Grid.Column="0"
+                  Grid.Row="0"
                   FontSize="16"
-                  Height="30"/>
+                  Height="30"
+                  Margin="0,0,10,0"
+                  SelectionChanged="ColorComboBox_SelectionChanged" />
+
         <Button Grid.Column="1"
+                Grid.Row="0"
                 Content="Изменить цвет"
                 Height="26"
+                Width="120"
                 Click="Button_Click"
                 Style="{StaticResource CustomButtonStyle}" />
+
+        <TextBox x:Name="customColorTextBox"
+                 Grid.Column="0"
+                 Grid.Row="1"
+                 Grid.ColumnSpan="2"
+                 Visibility="Collapsed"
+                 Margin="0,10,0,0"
+                 FontSize="14"
+                 TextChanged="CustomColorTextBox_TextChanged" />
+
+        <Border x:Name="colorPreview"
+                Grid.Column="0"
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Width="100"
+                Height="30"
+                Margin="0,10,0,0"
+                BorderBrush="Black"
+                CornerRadius="6"
+                BorderThickness="1"
+                HorizontalAlignment="Left" />
     </Grid>
 </UserControl>
