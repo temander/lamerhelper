@@ -115,7 +115,12 @@ namespace LamerHelper
         // Обработчик нажатия на кнопку информации
         private void InfoButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show($"Тестовая инфа!", "Информация");
+            Button currentBtn = sender as Button;
+            Grid parentBtn = currentBtn.Parent as Grid;
+            StackPanel parentGrid = parentBtn.Parent as StackPanel;
+            ModuleBase btnModule = parentGrid.Children[1] as ModuleBase;
+
+            MessageBox.Show(btnModule.Description, "Информация");
         }
 
         // Обработчик переключения категорий в навигации с анимацией
