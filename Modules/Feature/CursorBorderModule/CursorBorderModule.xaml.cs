@@ -11,6 +11,15 @@ namespace LamerHelper.Modules.Feature
         public CursorBorderModule()
         {
             InitializeComponent();
+
+            colorComboBox.ItemsSource = new ComboBoxColorBorder[]
+            {
+                new ComboBoxColorBorder { Name = "Стандартный", StrokeColor = "0 120 215", BorderColor = "0 102 204" },
+                new ComboBoxColorBorder { Name = "Красный", StrokeColor = "210 0 0", BorderColor = "255 0 0" },
+                new ComboBoxColorBorder { Name = "Зелёный", StrokeColor = "0 210 0", BorderColor = "0 255 0" },
+                new ComboBoxColorBorder { Name = "Синий", StrokeColor = "0 0 210", BorderColor = "0 0 255" },
+            };
+            colorComboBox.SelectedIndex = 0;
         }
 
         public string ModuleName => "CursorBorderModule";
@@ -21,9 +30,10 @@ namespace LamerHelper.Modules.Feature
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: сделать выбор цвета
-            ChangeValue("HotTrackingColor", "255 0 0"); // обводка
-            ChangeValue("Hilight", "210 0 0"); // панель
+            ComboBoxColorBorder activeOption = colorComboBox.SelectedItem as ComboBoxColorBorder;
+
+            ChangeValue("HotTrackingColor", activeOption.BorderColor); // панель
+            ChangeValue("Hilight", activeOption.StrokeColor); // обводка
 
             MessageBox.Show("Новый цвет применился! Перезапустите Windows, чтобы изменения вступили в силу.", "Фишка", MessageBoxButton.OK, MessageBoxImage.Information);
         }
@@ -44,6 +54,15 @@ namespace LamerHelper.Modules.Feature
             {
                 MessageBox.Show($"Ошибка при изменении реестра: {ex.Message}", "Фишка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private class ComboBoxColorBorder
+        {
+            public string Name { get; set; } = "";
+            public string StrokeColor { get; set; } = "";
+            public string BorderColor { get; set; } = "";
+
+            public override string ToString() => $"{Name} ({StrokeColor})";
         }
     }
 }
