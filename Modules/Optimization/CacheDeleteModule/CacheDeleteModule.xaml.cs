@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using LamerHelper.Modules;
 
 namespace LamerHelper.Modules.Optimization
 {

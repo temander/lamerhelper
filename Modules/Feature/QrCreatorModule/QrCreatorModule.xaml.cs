@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
-using System.IO;
 
 namespace LamerHelper.Modules.Feature
 {

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using LamerHelper.Modules;
 using Microsoft.Win32;
 
 namespace LamerHelper.Modules.Feature
