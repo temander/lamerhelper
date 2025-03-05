@@ -105,6 +105,10 @@
     <Page Include="Modules\Feature\CursorBorderModule\CursorBorderModule.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Modules\Optimization\CacheDeleteModule\CacheDeleteModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Modules\Optimization\ClearDNSModule\ClearDNSModule.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,6 +127,9 @@
     <Compile Include="Modules\IModule.cs" />
     <Compile Include="Modules\ModuleBase.cs" />
     <Compile Include="Modules\ModuleLoader.cs" />
+    <Compile Include="Modules\Optimization\CacheDeleteModule\CacheDeleteModule.xaml.cs">
+      <DependentUpon>CacheDeleteModule.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Optimization\ClearDNSModule\ClearDNSModule.xaml.cs">
       <DependentUpon>ClearDNSModule.xaml</DependentUpon>
     </Compile>
