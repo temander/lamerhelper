@@ -27,6 +27,16 @@ namespace LamerHelper
                 DragMove();
         }
 
+        private void TrayButton_Click(object sender, RoutedEventArgs e)
+        {
+            Hide();
+        }
+
+        private void Taskbar_Click(object sender, RoutedEventArgs e)
+        {
+            Show();
+        }
+
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
