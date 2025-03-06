@@ -6,6 +6,13 @@
         <SolidColorBrush x:Key="PrimaryBackground" Color="#1E1E1E"/>
         <SolidColorBrush x:Key="SecondaryBackground" Color="#2D2D30"/>
         <SolidColorBrush x:Key="AccentColor" Color="#2e57bf"/>
+        
+        <!-- Кастомный стиль шрифта приложения -->
+        <Style x:Key="AppFont">
+            <Setter Property="TextElement.FontFamily"
+                    Value="/Fonts/#Montserrat">
+            </Setter>
+        </Style>
 
         <!-- Кастомный стиль для кнопок -->
         <Style x:Key="CustomButtonStyle" TargetType="Button">
@@ -20,6 +27,8 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="FontFamily" Value="/Fonts/#Montserrat"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
@@ -50,7 +59,8 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Padding" Value="10"/>
             <Setter Property="Margin" Value="6"/>
-            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontFamily" Value="/Fonts/#Montserrat"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">

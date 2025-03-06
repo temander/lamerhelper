@@ -156,6 +156,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Fonts\Montserrat-Regular.ttf" />
     <None Include="ModuleConfig.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

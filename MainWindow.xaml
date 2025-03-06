@@ -35,7 +35,8 @@
                            Text="LamerHelper"
                            VerticalAlignment="Center"
                            FontSize="16"
-                           Foreground="White"/>
+                           Foreground="White"
+                           Style="{StaticResource AppFont}"/>
 
                 <Button Grid.Column="2"
                         Width="32"

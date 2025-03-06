@@ -70,7 +70,8 @@ namespace LamerHelper
                         FontSize = 16,
                         Foreground = System.Windows.Media.Brushes.White,
                         Margin = new Thickness(0, 0, 0, 6),
-                        VerticalAlignment = VerticalAlignment.Center
+                        VerticalAlignment = VerticalAlignment.Center,
+                        Style = (Style)FindResource("AppFont")
                     };
                     Grid.SetColumn(header, 0);
 

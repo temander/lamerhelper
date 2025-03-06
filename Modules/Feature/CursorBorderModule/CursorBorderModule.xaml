@@ -16,10 +16,11 @@
         <ComboBox x:Name="colorComboBox"
                   Grid.Column="0"
                   Grid.Row="0"
-                  FontSize="16"
-                  Height="30"
+                  FontSize="14"
+                  Height="24"
                   Margin="0,0,10,0"
-                  SelectionChanged="ColorComboBox_SelectionChanged" />
+                  SelectionChanged="ColorComboBox_SelectionChanged"
+                  Style="{StaticResource AppFont}"/>
 
         <Button Grid.Column="1"
                 Grid.Row="0"
