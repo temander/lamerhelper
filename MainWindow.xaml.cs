@@ -19,6 +19,7 @@ namespace LamerHelper
         {
             InitializeComponent();
             LoadModules();
+            CreateTrayContextMenu();
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -40,6 +41,12 @@ namespace LamerHelper
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        // TODO: сделать contextmenu для иконки приложения
+        private void CreateTrayContextMenu()
+        {
+
         }
 
         private void LoadModules()

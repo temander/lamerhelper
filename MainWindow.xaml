@@ -14,10 +14,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <tb:TaskbarIcon Visibility="Visible"
-                        TrayLeftMouseDown="Taskbar_Click"
+        <tb:TaskbarIcon x:Name="TrayIcon"
+                        Visibility="Visible"
                         ToolTip="LamerHelper"
-                        IconSource="/Images/program.ico"/>
+                        TrayLeftMouseDown="Taskbar_Click"
+                        IconSource="/Images/program.ico">
+        </tb:TaskbarIcon>
 
         <Border Grid.Row="0" Background="{StaticResource SecondaryBackground}" CornerRadius="8 8 0 0">
             <Grid MouseDown="TitleBar_MouseDown">
