@@ -21,7 +21,7 @@ namespace LamerHelper.Modules.Feature
         public string ModuleName => "FolderColorizerModule";
         public string DisplayName => "Изменение цвета папок";
         public string Category => "Фишка";
-        public string Description => "Позволяет изменять цвет папок в контекстном меню windows";
+        public string Description => "Позволяет изменять цвет папок через контекстное меню Windows.";
         public UserControl GetModuleControl() => this;
 
         private void Button_ClickEnable(object sender, RoutedEventArgs e)
@@ -70,8 +70,6 @@ Start-Process explorer.exe";
                 File.WriteAllText(scriptPath, psScript, System.Text.Encoding.UTF8);
 
                 AddContextMenuEntry(targetDirectory);
-
-                MessageBox.Show("Иконки и PowerShell-скрипт успешно созданы!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
