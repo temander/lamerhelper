@@ -29,6 +29,12 @@
       "DisplayName": "Удалить кэш обновлений windows",
       "Category": "Оптимизация",
       "Type": "LamerHelper.Modules.Optimization.CacheDeleteModule"
+    },
+    {
+      "ModuleName": "FolderColorizerModule",
+      "DisplayName": "Изменение цвета папок",
+      "Category": "Фишка",
+      "Type": "LamerHelper.Modules.Feature.FolderColorizerModule"
     }
   ]
 }
