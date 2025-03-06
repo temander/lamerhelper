@@ -6,13 +6,11 @@
         <StackPanel>
             <Button Content="Включить"
                     Height="26"
-                    Width="120"
                     Click="Button_ClickEnable"
                     Style="{StaticResource CustomButtonStyle}" />
 
             <Button Content="Выключить"
                     Height="26"
-                    Width="120"
                     Style="{StaticResource CustomButtonStyle}" />
         </StackPanel>
     </Grid>
