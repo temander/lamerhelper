@@ -6,7 +6,7 @@
         <SolidColorBrush x:Key="PrimaryBackground" Color="#1E1E1E"/>
         <SolidColorBrush x:Key="SecondaryBackground" Color="#2D2D30"/>
         <SolidColorBrush x:Key="AccentColor" Color="#2e57bf"/>
-        
+
         <!-- Кастомный стиль шрифта приложения -->
         <Style x:Key="AppFont">
             <Setter Property="TextElement.FontFamily"

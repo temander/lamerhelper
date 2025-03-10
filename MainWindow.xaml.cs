@@ -1,7 +1,4 @@
 ﻿using LamerHelper.Modules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,7 +16,7 @@ namespace LamerHelper
         {
             InitializeComponent();
             LoadModules();
-            CreateTrayContextMenu();
+            //CreateTrayContextMenu();
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -28,15 +25,15 @@ namespace LamerHelper
                 DragMove();
         }
 
-        private void TrayButton_Click(object sender, RoutedEventArgs e)
-        {
-            Hide();
-        }
+        //private void TrayButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Hide();
+        //}
 
-        private void Taskbar_Click(object sender, RoutedEventArgs e)
-        {
-            Show();
-        }
+        //private void Taskbar_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Show();
+        //}
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
@@ -44,10 +41,10 @@ namespace LamerHelper
         }
 
         // TODO: сделать contextmenu для иконки приложения
-        private void CreateTrayContextMenu()
-        {
+        //private void CreateTrayContextMenu()
+        //{
 
-        }
+        //}
 
         private void LoadModules()
         {

@@ -14,13 +14,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <tb:TaskbarIcon x:Name="TrayIcon"
-                        Visibility="Visible"
-                        ToolTip="LamerHelper"
-                        TrayLeftMouseDown="Taskbar_Click"
-                        IconSource="/Images/program.ico">
-        </tb:TaskbarIcon>
-
         <Border Grid.Row="0" Background="{StaticResource SecondaryBackground}" CornerRadius="8 8 0 0">
             <Grid MouseDown="TitleBar_MouseDown">
                 <Grid.ColumnDefinitions>
@@ -43,7 +36,6 @@
                 <Button Grid.Column="2"
                         Width="32"
                         Height="32"
-                        Click="TrayButton_Click"
                         Background="Transparent"
                         BorderBrush="Transparent"
                         Padding="0"
@@ -56,7 +48,7 @@
                                         <Border Background="Transparent"
                                                 CornerRadius="4">
                                             <Image x:Name="TrayImage"
-                                                   Source="/Images/tray_btn.png"
+                                                   Source="/images/tray_btn.png"
                                                    Stretch="Uniform"
                                                    Opacity="0.8"/>
                                         </Border>

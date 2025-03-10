@@ -1,12 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Resources;
-using LamerHelper.Modules;
-using LamerHelper.Modules.Feature;
 using Microsoft.Win32;
 
 namespace LamerHelper.Modules.Feature
