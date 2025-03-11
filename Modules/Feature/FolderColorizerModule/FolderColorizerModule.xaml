@@ -11,6 +11,7 @@
 
             <Button Content="Выключить"
                     Height="26"
+                    Click="Button_ClickDisable"
                     Style="{StaticResource CustomButtonStyle}" />
         </StackPanel>
     </Grid>

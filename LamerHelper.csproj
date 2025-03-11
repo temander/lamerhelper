@@ -11,6 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="FodyWeavers.xsd" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Images\close_btn.png" />
     <Resource Include="Images\info.png" />
     <Resource Include="Images\program.ico" />
