@@ -1,0 +1,58 @@
+<UserControl x:Class="LamerHelper.Modules.Feature.SSHGeneratorModule"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern" 
+             xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
+             Height="Auto" Width="Auto">
+    <Grid Margin="10">
+        <ikw:SimpleStackPanel Spacing="10">
+            <Button x:Name="buttonGenerate"
+                    Click="ButtonGenerate_Click">
+                <ui:IconAndText Icon="{x:Static ui:SegoeFluentIcons.Accept}"
+                                Content="Сгенерировать SSH ключи"/>
+            </Button>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <ikw:SimpleStackPanel Grid.Column="0" Spacing="10">
+                    <TextBlock Text="Публичный ключ:" FontWeight="Bold" Margin="0,10,0,0"/>
+                    <TextBox x:Name="textBoxPublicKey" 
+                             AcceptsReturn="True" 
+                             Height="150" 
+                             TextWrapping="Wrap" 
+                             IsReadOnly="True" 
+                             Visibility="Collapsed"/>
+                    <Button x:Name="buttonCopyPublic" 
+                            Content="Копировать публичный ключ" 
+                            Click="ButtonCopyPublic_Click" 
+                            Visibility="Collapsed"/>
+                </ikw:SimpleStackPanel>
+
+                <Grid Grid.Column="1"/>
+
+                <ikw:SimpleStackPanel Grid.Column="2" Spacing="10">
+                    <TextBlock Text="Приватный ключ:" FontWeight="Bold" Margin="0,10,0,0"/>
+                    <TextBox x:Name="textBoxPrivateKey" 
+                             AcceptsReturn="True" 
+                             Height="150" 
+                             TextWrapping="Wrap" 
+                             IsReadOnly="True" 
+                             Visibility="Collapsed"/>
+                    <Button x:Name="buttonCopyPrivate" 
+                            Content="Копировать приватный ключ" 
+                            Click="ButtonCopyPrivate_Click" 
+                            Visibility="Collapsed"/>
+                    <Button x:Name="buttonSavePrivate" 
+                            Content="Сохранить в системе" 
+                            Click="ButtonSavePrivate_Click" 
+                            Visibility="Collapsed"/>
+                </ikw:SimpleStackPanel>
+            </Grid>
+        </ikw:SimpleStackPanel>
+    </Grid>
+</UserControl>

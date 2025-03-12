@@ -35,6 +35,12 @@
       "DisplayName": "Изменение цвета папок",
       "Category": "Фишка",
       "Type": "LamerHelper.Modules.Feature.FolderColorizerModule"
+    },
+    {
+      "ModuleName": "SSHGeneratorModule",
+      "DisplayName": "Генерация SSH",
+      "Category": "Фишка",
+      "Type": "LamerHelper.Modules.Feature.SSHGeneratorModule"
     }
   ]
 }
