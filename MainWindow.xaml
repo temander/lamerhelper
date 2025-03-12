@@ -26,7 +26,7 @@
 
                 <Image Grid.Column="0"
                        Source="/Images/program.ico"
-                       Margin="8 8 8 8"/>
+                       Margin="8,8,8,8"/>
                 <TextBlock Grid.Column="1"
                            Text="LamerHelper"
                            VerticalAlignment="Center"
@@ -117,7 +117,7 @@
                     <ListBox x:Name="NavigationListBox"
                              Background="Transparent"
                              BorderThickness="0"
-                             Margin="6 6 6 6"
+                             Margin="6,6,6,6"
                              SelectionChanged="NavigationListBox_SelectionChanged"
                              SelectedIndex="0" av:ItemsSource="{av:SampleData ItemCount=5}"/>
                 </Border>

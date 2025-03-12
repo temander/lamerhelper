@@ -14,7 +14,7 @@ namespace LamerHelper.Modules.Feature
         }
 
         public string ModuleName => "QrCreatorModule";
-        public string DisplayName => "Создание QR-кода из любой ссылки";
+        public string DisplayName => "Создание QR-кода из любого текста";
         public string Category => "Фишка";
         public string Description => "Позволяет создать QR-код из любого текста";
         public UserControl GetModuleControl() => this;
@@ -89,10 +89,6 @@ namespace LamerHelper.Modules.Feature
                     MessageBox.Show("QR-код сохранен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
-            else
-            {
-                MessageBox.Show("Сначала создайте QR-код!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
         }
 
         private void ButtonCopy_Click(object sender, RoutedEventArgs e)
@@ -102,10 +98,6 @@ namespace LamerHelper.Modules.Feature
                 BitmapSource bitmapSource = (BitmapSource)imageQR.Source;
                 Clipboard.SetImage(bitmapSource);
                 MessageBox.Show("QR-код скопирован в буфер обмена!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-            {
-                MessageBox.Show("Сначала создайте QR-код!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
     }

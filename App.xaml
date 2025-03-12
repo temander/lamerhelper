@@ -7,14 +7,14 @@
         <SolidColorBrush x:Key="SecondaryBackground" Color="#2D2D30"/>
         <SolidColorBrush x:Key="AccentColor" Color="#2e57bf"/>
 
-        <!-- Кастомный стиль шрифта приложения -->
+        <!-- Стиль для шрифта -->
         <Style x:Key="AppFont">
             <Setter Property="TextElement.FontFamily"
                     Value="/Fonts/#Montserrat">
             </Setter>
         </Style>
 
-        <!-- Кастомный стиль для кнопок -->
+        <!-- Стиль для кнопок -->
         <Style x:Key="CustomButtonStyle" TargetType="Button">
             <Setter Property="Background">
                 <Setter.Value>
@@ -54,7 +54,7 @@
             </Setter>
         </Style>
 
-        <!-- Стиль для элементов навигации (ListBoxItem) -->
+        <!-- Стиль для элементов навигации -->
         <Style TargetType="ListBoxItem">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontFamily" Value="/Fonts/#Montserrat"/>

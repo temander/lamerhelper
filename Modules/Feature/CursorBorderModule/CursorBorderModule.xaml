@@ -19,8 +19,7 @@
                   FontSize="14"
                   Height="24"
                   Margin="0,0,10,0"
-                  SelectionChanged="ColorComboBox_SelectionChanged"
-                  Style="{StaticResource AppFont}"/>
+                  SelectionChanged="ColorComboBox_SelectionChanged"/>
 
         <Button Grid.Column="1"
                 Grid.Row="0"
