@@ -1,57 +1,33 @@
 <UserControl x:Class="LamerHelper.Modules.Feature.QrCreatorModule"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern" 
+             xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
              Height="Auto" Width="Auto">
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <Grid>
+        <ikw:SimpleStackPanel Spacing="10">
+            <TextBox x:Name="textBoxInput"/>
+            <Button x:Name="buttonGenerate"
+                    Click="ButtonGenerate_Click">
+                <ui:IconAndText Icon="{x:Static ui:SegoeFluentIcons.QRCode}"
+                                Content="Создать QR-код"/>
+            </Button>
 
-        <TextBox x:Name="textBoxInput"
-                 Height="22"
-                 FontSize="16"
-                 Grid.Row="0" 
-                 Margin="0,0,0,10" />
+            <Image x:Name="imageQR" 
+                   Width="150" 
+                   Height="150" 
+                   Visibility="Collapsed" />
 
-        <ComboBox x:Name="resolComboBox"
-                  Grid.Row="1"
-                  Height="24"
-                  Margin="0,0,0,10"/>
+            <Button x:Name="buttonSave" 
+                    Content="Сохранить QR-код" 
+                    Click="ButtonSave_Click"
+                    Visibility="Collapsed" />
 
-        <Button x:Name="buttonGenerate"
-                Height="26"
-                Grid.Row="2" 
-                Content="Создать QR-код" 
-                Click="ButtonGenerate_Click" 
-                Margin="0,0,0,10" 
-                Style="{StaticResource CustomButtonStyle}" />
-
-        <Image x:Name="imageQR" 
-               Grid.Row="3" 
-               Width="150" 
-               Height="150" 
-               Margin="0,0,0,10"
-               Visibility="Collapsed" />
-
-        <Button x:Name="buttonSave" 
-                Height="26"
-                Grid.Row="4" 
-                Content="Сохранить QR-код" 
-                Click="ButtonSave_Click" 
-                Visibility="Collapsed" 
-                Style="{StaticResource CustomButtonStyle}" />
-
-        <Button x:Name="buttonCopy" 
-                Height="26"
-                Grid.Row="5" 
-                Content="Копировать в буфер" 
-                Click="ButtonCopy_Click" 
-                Visibility="Collapsed"
-                Style="{StaticResource CustomButtonStyle}" />
+            <Button x:Name="buttonCopy" 
+                    Content="Копировать в буфер" 
+                    Click="ButtonCopy_Click" 
+                    Visibility="Collapsed" />
+        </ikw:SimpleStackPanel>
     </Grid>
 </UserControl>
+    

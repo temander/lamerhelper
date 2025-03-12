@@ -1,6 +1,7 @@
 <UserControl x:Class="LamerHelper.Modules.Feature.CursorBorderModule"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
              Height="Auto" Width="Auto">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -16,18 +17,15 @@
         <ComboBox x:Name="colorComboBox"
                   Grid.Column="0"
                   Grid.Row="0"
-                  FontSize="14"
-                  Height="24"
                   Margin="0,0,10,0"
-                  SelectionChanged="ColorComboBox_SelectionChanged"/>
+                  SelectionChanged="ColorComboBox_SelectionChanged"
+                  HorizontalAlignment="Stretch" />
 
         <Button Grid.Column="1"
                 Grid.Row="0"
-                Content="Изменить цвет"
-                Height="26"
-                Width="120"
-                Click="Button_Click"
-                Style="{StaticResource CustomButtonStyle}" />
+                Click="Button_Click">
+            <ui:IconAndText Icon="{x:Static ui:SegoeFluentIcons.Color}" Content="Изменить цвет"/>
+        </Button>
 
         <TextBox x:Name="customColorTextBox"
                  Grid.Column="0"
@@ -35,8 +33,6 @@
                  Grid.ColumnSpan="2"
                  Visibility="Collapsed"
                  Margin="0,10,0,0"
-                 Height="22"
-                 FontSize="16"
                  TextChanged="CustomColorTextBox_TextChanged" />
 
         <Border x:Name="colorPreview"

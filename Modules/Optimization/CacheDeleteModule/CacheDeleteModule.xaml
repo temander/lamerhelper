@@ -1,8 +1,12 @@
 <UserControl x:Class="LamerHelper.Modules.Optimization.CacheDeleteModule"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
              Height="Auto" Width="Auto">
     <Grid>
-        <Button Content="Активировать (требуются права администратора)" Height="26" Click="Button_Click" Style="{StaticResource CustomButtonStyle}" />
+        <Button Click="Button_Click">
+            <ui:IconAndText Icon="{x:Static ui:SegoeFluentIcons.MixedMediaBadge}"
+                                Content="Активировать (требуются права администратора)"/>
+        </Button>
     </Grid>
 </UserControl>

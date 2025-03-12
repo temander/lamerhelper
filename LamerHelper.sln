@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35806.99 d17.13
+VisualStudioVersion = 17.13.35818.85 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LamerHelper", "LamerHelper.csproj", "{648CF552-8155-4ED3-B9B5-E1DA07159EF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LamerHelper", "LamerHelper.csproj", "{623FEC40-D056-4B36-B57F-54C064F40733}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{648CF552-8155-4ED3-B9B5-E1DA07159EF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{648CF552-8155-4ED3-B9B5-E1DA07159EF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{648CF552-8155-4ED3-B9B5-E1DA07159EF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{648CF552-8155-4ED3-B9B5-E1DA07159EF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{623FEC40-D056-4B36-B57F-54C064F40733}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{623FEC40-D056-4B36-B57F-54C064F40733}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{623FEC40-D056-4B36-B57F-54C064F40733}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{623FEC40-D056-4B36-B57F-54C064F40733}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {10EE543E-ECEC-4C17-AC3D-0910A7D1D5FB}
+		SolutionGuid = {33ACCA68-DD72-4AE3-A5DB-3B25BD80D3E9}
 	EndGlobalSection
 EndGlobal

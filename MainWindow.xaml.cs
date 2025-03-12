@@ -1,165 +1,100 @@
 ﻿using LamerHelper.Modules;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
+using iNKORE.UI.WPF.Modern.Controls;
 
 namespace LamerHelper
 {
     public partial class MainWindow : Window
     {
         // Словарь для хранения содержимого для каждой категории
-        private Dictionary<string, UIElement> _categoryContents = new Dictionary<string, UIElement>();
+        private readonly Dictionary<string, UIElement> _categoryContents = [];
 
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
             LoadModules();
-            //CreateTrayContextMenu();
+
+            if (NavigationView_Root.MenuItems.Count > 0)
+            {
+                NavigationView_Root.SelectedItem = NavigationView_Root.MenuItems[0];
+                if (NavigationView_Root.MenuItems[0] is NavigationViewItem firstItem)
+                {
+                    NavigationView_Root.Content = _categoryContents[firstItem.Tag.ToString()];
+                }
+            }
         }
-
-        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                DragMove();
-        }
-
-        //private void TrayButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Hide();
-        //}
-
-        //private void Taskbar_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Show();
-        //}
-
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        // TODO: сделать contextmenu для иконки приложения
-        //private void CreateTrayContextMenu()
-        //{
-
-        //}
 
         private void LoadModules()
         {
             string configPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ModuleConfig.json");
             List<IModule> modules = ModuleLoader.LoadModules(configPath);
 
-            // Группируем модули по категориям
             var groupedModules = modules.GroupBy(m => m.Category);
             foreach (var group in groupedModules)
             {
-                ScrollViewer scrollViewer = new ScrollViewer
+                ScrollViewer scrollViewer = new()
                 {
-                    VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+                    VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
                 };
 
-                StackPanel stackPanel = new StackPanel { Margin = new Thickness(10) };
+                StackPanel stackPanel = new() { Margin = new Thickness(10) };
 
                 foreach (var module in group)
                 {
-                    Grid grid = new Grid();
-                    grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-                    grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-
-                    TextBlock header = new TextBlock
+                    TextBlock headerText = new()
                     {
                         Text = module.DisplayName,
                         FontSize = 16,
-                        Foreground = System.Windows.Media.Brushes.White,
-                        Margin = new Thickness(0, 0, 0, 6),
-                        VerticalAlignment = VerticalAlignment.Center,
-                        Style = (Style)FindResource("AppFont")
+                        FontWeight = FontWeights.Bold,
+                        Margin = new Thickness(6, 0, 0, 6)
                     };
-                    Grid.SetColumn(header, 0);
 
-                    Button info = new Button
+                    UserControl moduleControl = module.GetModuleControl();
+                    moduleControl.Margin = new Thickness(4);
+
+                    StackPanel modulePanel = new();
+                    modulePanel.Children.Add(headerText);
+                    modulePanel.Children.Add(moduleControl);
+
+                    Border border = new()
                     {
-                        Content = "?",
-                        FontSize = 16,
-                        Width = 24,
-                        Foreground = Brushes.Gray,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        HorizontalAlignment = HorizontalAlignment.Right,
-                        Style = (Style)FindResource("CustomButtonStyle"),
-                        Tag = module
+                        BorderBrush = Brushes.Gray,
+                        BorderThickness = new Thickness(1),
+                        CornerRadius = new CornerRadius(5),
+                        Margin = new Thickness(0, 0, 0, 10),
+                        Padding = new Thickness(5, 6, 5, 5),
+                        Child = modulePanel
                     };
-                    info.Click += InfoButton_Click;
-                    Grid.SetColumn(info, 1);
 
-                    UserControl control = module.GetModuleControl();
-                    control.Margin = new Thickness(0, 4, 0, 0);
-
-                    grid.Children.Add(header);
-                    grid.Children.Add(info);
-
-                    StackPanel modulePanel = new StackPanel { Margin = new Thickness(8) };
-                    modulePanel.Children.Add(grid);
-                    modulePanel.Children.Add(control);
-
-                    stackPanel.Children.Add(modulePanel);
+                    stackPanel.Children.Add(border);
                 }
-                scrollViewer.Content = stackPanel;
 
+                scrollViewer.Content = stackPanel;
                 _categoryContents[group.Key] = scrollViewer;
 
-                NavigationListBox.Items.Add(group.Key);
-            }
-
-            if (NavigationListBox.Items.Count > 0)
-            {
-                NavigationListBox.SelectedIndex = 0;
-            }
-        }
-
-        // Обработчик нажатия на кнопку информации
-        private void InfoButton_Click(object sender, RoutedEventArgs e)
-        {
-            Button currentBtn = sender as Button;
-            Grid parentBtn = currentBtn.Parent as Grid;
-            StackPanel parentStack = parentBtn.Parent as StackPanel;
-            IModule btnModule = parentStack.Children[1] as IModule;
-
-            MessageBox.Show($"{btnModule.Description}", "Информация");
-        }
-
-        // Обработчик переключения категорий в навигации с анимацией
-        private void NavigationListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (NavigationListBox.SelectedItem != null)
-            {
-                string selectedCategory = NavigationListBox.SelectedItem.ToString();
-                if (_categoryContents.ContainsKey(selectedCategory))
+                NavigationViewItem navItem = new()
                 {
-                    var newContent = _categoryContents[selectedCategory];
+                    Content = group.Key,
+                    Tag = group.Key
+                };
 
-                    // Если уже что-то отображается, выполняем анимацию исчезновения
-                    if (ContentArea.Content is UIElement currentContent)
-                    {
-                        var fadeOut = new DoubleAnimation(1, 0, new Duration(TimeSpan.FromMilliseconds(200)));
-                        fadeOut.Completed += (s, a) =>
-                        {
-                            ContentArea.Content = newContent;
-                            newContent.Opacity = 0;
-                            var fadeIn = new DoubleAnimation(0, 1, new Duration(TimeSpan.FromMilliseconds(200)));
-                            newContent.BeginAnimation(UIElement.OpacityProperty, fadeIn);
-                        };
-                        currentContent.BeginAnimation(UIElement.OpacityProperty, fadeOut);
-                    }
-                    else
-                    {
-                        ContentArea.Content = newContent;
-                        newContent.Opacity = 0;
-                        var fadeIn = new DoubleAnimation(0, 1, new Duration(TimeSpan.FromMilliseconds(200)));
-                        newContent.BeginAnimation(UIElement.OpacityProperty, fadeIn);
-                    }
-                }
+                NavigationView_Root.MenuItems.Add(navItem);
+            }
+        }
+
+        private void NavigationView_SelectionChanged(object sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            if (NavigationView_Root.SelectedItem is NavigationViewItem navItem &&
+                navItem.Tag is string category &&
+                _categoryContents.TryGetValue(category, out UIElement? content))
+            {
+                NavigationView_Root.Content = content;
             }
         }
     }

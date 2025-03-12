@@ -28,21 +28,19 @@ namespace LamerHelper.Modules.Feature
                 if (!Directory.Exists(targetDirectory))
                     Directory.CreateDirectory(targetDirectory);
 
-                string[] iconNames = { "red.ico", "green.ico", "purple.ico", "blue.ico", "default.ico", "orange.ico" };
+                string[] iconNames = ["red.ico", "green.ico", "purple.ico", "blue.ico", "default.ico", "orange.ico"];
 
                 foreach (string iconName in iconNames)
                 {
                     string resourceFile = $"pack://application:,,,/Images/Folders/{iconName}";
-                    Uri resourceUri = new Uri(resourceFile, UriKind.Absolute);
+                    Uri resourceUri = new(resourceFile, UriKind.Absolute);
 
                     StreamResourceInfo resourceStream = Application.GetResourceStream(resourceUri);
                     if (resourceStream != null)
                     {
                         string destinationPath = Path.Combine(targetDirectory, iconName);
-                        using (FileStream fileStream = new FileStream(destinationPath, FileMode.Create, FileAccess.Write))
-                        {
-                            resourceStream.Stream.CopyTo(fileStream);
-                        }
+                        using FileStream fileStream = new(destinationPath, FileMode.Create, FileAccess.Write);
+                        resourceStream.Stream.CopyTo(fileStream);
                     }
                 }
 
@@ -76,7 +74,7 @@ Stop-Process -Name explorer -Force";
             }
         }
 
-        private void AddContextMenuEntry(string targetDirectory)
+        private static void AddContextMenuEntry(string targetDirectory)
         {
             try
             {
@@ -91,7 +89,7 @@ Stop-Process -Name explorer -Force";
                     key.SetValue("SubCommands", "");
                 }
 
-                string[] colors = { "red", "green", "purple", "blue", "default", "orange" };
+                string[] colors = ["red", "green", "purple", "blue", "default", "orange"];
                 foreach (string color in colors)
                 {
                     string colorKey = $@"{menuKey}\shell\{color}";
@@ -125,7 +123,7 @@ Stop-Process -Name explorer -Force";
                     "lamerhelper",
                     "Folders");
 
-                RemoveContextMenuEntries(targetDirectory);
+                RemoveContextMenuEntries();
 
                 if (Directory.Exists(targetDirectory))
                 {
@@ -145,14 +143,14 @@ Stop-Process -Name explorer -Force";
             }
         }
 
-        private void RemoveContextMenuEntries(string targetDirectory)
+        private static void RemoveContextMenuEntries()
         {
             try
             {
                 const string menuKey = @"Directory\shell\LamerHelper.ColorizeFolder";
 
                 // Удаление главного ключа со всеми подразделами
-                using (RegistryKey key = Registry.ClassesRoot.OpenSubKey(menuKey, true))
+                using (RegistryKey? key = Registry.ClassesRoot.OpenSubKey(menuKey, true))
                 {
                     if (key != null)
                     {
@@ -161,17 +159,15 @@ Stop-Process -Name explorer -Force";
                 }
 
                 // Дополнительная очистка кэшированных иконок
-                using (RegistryKey shellIconCache = Registry.CurrentUser.OpenSubKey(
+                using RegistryKey? shellIconCache = Registry.CurrentUser.OpenSubKey(
                     @"Software\Microsoft\Windows\CurrentVersion\Explorer\ShellIconOverlayIdentifiers",
-                    true))
+                    true);
+                if (shellIconCache != null)
                 {
-                    if (shellIconCache != null)
+                    foreach (string subKey in shellIconCache.GetSubKeyNames()
+                        .Where(name => name.StartsWith("LamerHelperIcon")))
                     {
-                        foreach (string subKey in shellIconCache.GetSubKeyNames()
-                            .Where(name => name.StartsWith("LamerHelperIcon")))
-                        {
-                            shellIconCache.DeleteSubKeyTree(subKey);
-                        }
+                        shellIconCache.DeleteSubKeyTree(subKey);
                     }
                 }
             }

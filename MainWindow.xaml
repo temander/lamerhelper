@@ -1,129 +1,18 @@
-﻿<Window
+﻿<Window x:Class="LamerHelper.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:tb="http://www.hardcodet.net/taskbar"
-        xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="LamerHelper.MainWindow"
-        Title="LamerHelper"
-        Height="600" Width="900"
-        WindowStyle="None"
-        AllowsTransparency="True"
-        Background="Transparent"
-        WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <Border Grid.Row="0" Background="{StaticResource SecondaryBackground}" CornerRadius="8 8 0 0">
-            <Grid MouseDown="TitleBar_MouseDown">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="40"/>
-                </Grid.ColumnDefinitions>
-
-                <Image Grid.Column="0"
-                       Source="/Images/program.ico"
-                       Margin="8,8,8,8"/>
-                <TextBlock Grid.Column="1"
-                           Text="LamerHelper"
-                           VerticalAlignment="Center"
-                           FontSize="16"
-                           Foreground="White"
-                           Style="{StaticResource AppFont}"/>
-
-                <Button Grid.Column="2"
-                        Width="32"
-                        Height="32"
-                        Background="Transparent"
-                        BorderBrush="Transparent"
-                        Padding="0"
-                        Cursor="Hand">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="Transparent"
-                                                CornerRadius="4">
-                                            <Image x:Name="TrayImage"
-                                                   Source="/images/tray_btn.png"
-                                                   Stretch="Uniform"
-                                                   Opacity="0.8"/>
-                                        </Border>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter TargetName="TrayImage" Property="Opacity" Value="1"/>
-                                            </Trigger>
-                                            <Trigger Property="IsPressed" Value="True">
-                                                <Setter TargetName="TrayImage" Property="Opacity" Value="0.6"/>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Grid.Column="3"
-                        Width="32"
-                        Height="32"
-                        Click="CloseButton_Click"
-                        Background="Transparent"
-                        BorderBrush="Transparent"
-                        Padding="0"
-                        Cursor="Hand">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="Transparent"
-                                                CornerRadius="4">
-                                            <Image x:Name="CloseImage"
-                                                   Source="/Images/close_btn.png"
-                                                   Stretch="Uniform"
-                                                   Opacity="0.8"/>
-                                        </Border>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter TargetName="CloseImage" Property="Opacity" Value="1"/>
-                                            </Trigger>
-                                            <Trigger Property="IsPressed" Value="True">
-                                                <Setter TargetName="CloseImage" Property="Opacity" Value="0.6"/>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                </Button>
-            </Grid>
-        </Border>
-
-        <Border Grid.Row="1" Background="{StaticResource PrimaryBackground}" CornerRadius="0 0 8 8">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Border Grid.Column="0"
-                        Background="{StaticResource SecondaryBackground}"
-                        CornerRadius="0 0 0 8">
-                    <ListBox x:Name="NavigationListBox"
-                             Background="Transparent"
-                             BorderThickness="0"
-                             Margin="6,6,6,6"
-                             SelectionChanged="NavigationListBox_SelectionChanged"
-                             SelectedIndex="0" av:ItemsSource="{av:SampleData ItemCount=5}"/>
-                </Border>
-
-                <ContentControl Grid.Column="1" x:Name="ContentArea"/>
-            </Grid>
-        </Border>
-    </Grid>
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LamerHelper"
+        xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+        mc:Ignorable="d"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        ui:TitleBar.IsIconVisible="True"
+        WindowStartupLocation="CenterScreen"
+        Title="LamerHelper" Height="600" Width="900"
+        Loaded="Window_Loaded">
+    <ui:NavigationView x:Name="NavigationView_Root" IsPaneOpen="False"
+                       SelectionChanged="NavigationView_SelectionChanged"
+                       PaneDisplayMode="Top">
+    </ui:NavigationView>
 </Window>
