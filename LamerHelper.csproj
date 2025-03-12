@@ -32,8 +32,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Costura.Fody" Version="6.0.0" PrivateAssets="all" />
-    <PackageReference Include="Fody" Version="6.9.2" PrivateAssets="all" />
+    <PackageReference Include="Costura.Fody" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Fody" Version="6.9.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="iNKORE.UI.WPF" Version="1.2.8" />
     <PackageReference Include="iNKORE.UI.WPF.Modern" Version="0.10.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

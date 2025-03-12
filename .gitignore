@@ -1,7 +1,8 @@
+packages/
 bin/
 obj/
 
 .vs
 .vscode
 
-packages/
+desktop.ini

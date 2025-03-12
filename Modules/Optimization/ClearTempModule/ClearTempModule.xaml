@@ -5,8 +5,9 @@
              Height="Auto" Width="Auto">
     <Grid>
         <Button Click="Button_Click">
-            <ui:IconAndText Icon="{x:Static ui:SegoeFluentIcons.Sustainable}"
-                                Content="Активировать"/>
+            <ui:IconAndText x:Name="IconAndText"
+                            Icon="{x:Static ui:SegoeFluentIcons.Sustainable}"
+                            Content="Активировать"/>
         </Button>
     </Grid>
 </UserControl>

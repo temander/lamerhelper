@@ -1,6 +1,8 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System;
 using System.IO;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace LamerHelper.Modules.Optimization
 {
@@ -9,13 +11,66 @@ namespace LamerHelper.Modules.Optimization
         public ClearTempModule()
         {
             InitializeComponent();
+            Loaded += ClearTempModule_Loaded;
         }
 
         public string ModuleName => "ClearTempModule";
         public string DisplayName => "Очистить папку Temp";
         public string Category => "Оптимизация";
-        public string Description => "Удаляет кэш DNS, для получения новых данных. Может помочь при проблемах с доступам, таких как 'Невозможно установить соединение'. Также предотвращает возможные конфликты из-за различий DNS-информации от разных сетей.";
+        public string Description => "Очищает временную папку Temp, тем самым освобожая большое количество свободной памяти на диске.";
         public UserControl GetModuleControl() => this;
+
+        private async void ClearTempModule_Loaded(object sender, RoutedEventArgs e)
+        {
+            await CalculateAndDisplayTempFolderSizeAsync();
+        }
+
+        private async Task CalculateAndDisplayTempFolderSizeAsync()
+        {
+            string tempPath = Path.GetTempPath();
+            var progress = new Progress<long>(size => UpdateButtonText(size));
+            await Task.Run(() => CalculateFolderSize(tempPath, progress));
+        }
+
+        private void CalculateFolderSize(string folderPath, IProgress<long> progress)
+        {
+            long totalSize = 0;
+            try
+            {
+                var files = Directory.EnumerateFiles(folderPath, "*", SearchOption.AllDirectories);
+                int count = 0;
+                foreach (var file in files)
+                {
+                    try
+                    {
+                        FileInfo info = new FileInfo(file);
+                        totalSize += info.Length;
+                    }
+                    catch (Exception)
+                    {
+                        // Если не удалось получить размер файла, пропускаем его
+                    }
+                    count++;
+
+                    if (count % 10 == 0)
+                    {
+                        progress.Report(totalSize);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+
+            progress.Report(totalSize);
+        }
+
+        private void UpdateButtonText(long sizeInBytes)
+        {
+            double sizeInMB = sizeInBytes / (1024.0 * 1024.0);
+            this.IconAndText.Content = $"Активировать ({sizeInMB:F1} MB)";
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -30,7 +85,8 @@ namespace LamerHelper.Modules.Optimization
             }
             finally
             {
-                MessageBox.Show("Папка Temp очищена!", "Оптимизация", MessageBoxButton.OK, MessageBoxImage.Information);
+                ClearTempModule_Loaded(sender, e);
+                System.Windows.MessageBox.Show("Папка Temp очищена!", "Оптимизация", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -40,11 +96,11 @@ namespace LamerHelper.Modules.Optimization
             {
                 try
                 {
-                File.Delete(file);
+                    File.Delete(file);
                 }
                 catch (Exception ex)
                 {
-                    // Обработка ошибки
+                    // Обработка ошибки при удалении файла
                     _ = ex;
                 }
             }
@@ -60,7 +116,7 @@ namespace LamerHelper.Modules.Optimization
                 }
                 catch (Exception ex)
                 {
-                    // Обработка ошибки
+                    // Обработка ошибки при удалении директории
                     _ = ex;
                 }
             }
