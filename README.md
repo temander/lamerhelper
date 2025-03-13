@@ -65,8 +65,6 @@ namespace LamerHelper.Modules.Feature
 ```json
 {
   "ModuleName": "TestModule",
-  "DisplayName": "Название модуля",
-  "Category": "Фишка",
   "Type": "LamerHelper.Modules.Feature.TestModule"
 }
 ```
