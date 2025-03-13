@@ -49,7 +49,8 @@ namespace LamerHelper.Modules.Feature
     [string]$iconColor,
     [string]$folderPath
 )
-$iconFolder = ""C:\Users\darkf\Documents\lamerhelper\Folders""
+$docPath = [Environment]::GetFolderPath(""MyDocuments"")
+$iconFolder = ""$docPath\lamerhelper\Folders""
 $iconPath = Join-Path $iconFolder ""$iconColor.ico""
 $desktopIniPath = Join-Path $folderPath ""desktop.ini""
 if (Test-Path $desktopIniPath) {
