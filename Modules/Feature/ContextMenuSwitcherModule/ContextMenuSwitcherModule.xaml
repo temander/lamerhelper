@@ -10,16 +10,17 @@
                        Text="Определение текущего стиля..."
                        FontWeight="Bold"/>
 
-            <Button x:Name="btnWin10"
-                    Content="Включить меню Windows 10"
-                    Click="btnWin10_Click"
-                    ToolTip="Активирует классическое контекстное меню"/>
+            <Button Click="btnWin10_Click"
+                    ToolTip="Активирует классическое контекстное меню">
+                <ui:IconAndText Icon="{x:Static ui:SegoeFluentIcons.Add}"
+                                Content="Включить меню Windows 10"/>
+            </Button>
 
-            <Button x:Name="btnWin11"
-                    Content="Вернуть меню Windows 11"
-                    Click="btnWin11_Click"
-                    ToolTip="Восстанавливает новое контекстное меню"/>
-
+            <Button Click="btnWin11_Click"
+                    ToolTip="Восстанавливает новое контекстное меню">
+                <ui:IconAndText Icon="{x:Static ui:SegoeFluentIcons.Remove}"
+                                Content="Вернуть меню Windows 11"/>
+            </Button>
         </ikw:SimpleStackPanel>
     </Grid>
 </UserControl>

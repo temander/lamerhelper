@@ -1,6 +1,5 @@
 ﻿using Microsoft.Win32;
-using System;
-using System.ComponentModel;
+using System.Diagnostics;
 using System.Security;
 using System.Windows;
 using System.Windows.Controls;
@@ -55,6 +54,12 @@ namespace LamerHelper.Modules.Feature
                 else
                 {
                     Registry.CurrentUser.DeleteSubKeyTree(RegistryKeyPath);
+                }
+
+                Process[] explorer = Process.GetProcessesByName("explorer");
+                foreach (Process process in explorer)
+                {
+                    process.Kill();
                 }
 
                 UpdateStatus();
