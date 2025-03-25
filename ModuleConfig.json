@@ -41,6 +41,12 @@
       "DisplayName": "Генерация SSH",
       "Category": "Фишка",
       "Type": "LamerHelper.Modules.Feature.SSHGeneratorModule"
+    },
+    {
+      "ModuleName": "ContextMenuSwitcherModule",
+      "DisplayName": "Переключатель контекстного меню",
+      "Category": "Фишка",
+      "Type": "LamerHelper.Modules.Feature.ContextMenuSwitcherModule"
     }
   ]
 }
