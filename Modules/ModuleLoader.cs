@@ -38,7 +38,7 @@ namespace LamerHelper.Modules
                     Type? moduleType = Type.GetType(moduleInfo.Type);
                     if (moduleType == null)
                     {
-                        // Нету -> добавляем имя сборки
+                        // Нет -> добавляем имя сборки
                         string? assemblyName = Assembly.GetExecutingAssembly().FullName;
                         moduleType = Type.GetType($"{moduleInfo.Type}, {assemblyName}");
                     }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -60,7 +58,7 @@ namespace LamerHelper.Modules.Optimization
             }
             catch (Exception)
             {
-
+                // ignored
             }
 
             progress.Report(totalSize);

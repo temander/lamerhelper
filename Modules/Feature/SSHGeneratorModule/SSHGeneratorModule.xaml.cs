@@ -26,23 +26,22 @@ namespace LamerHelper.Modules.Feature
         {
             try
             {
-                using (var rsa = new RSACryptoServiceProvider(2048))
-                {
-                    rsa.PersistKeyInCsp = false;
-                    string privateKey = ConvertPrivateKeyToPEM(rsa);
-                    string publicKey = ConvertPublicKeyToOpenSSH(rsa);
+                using var rsa = new RSACryptoServiceProvider(2048);
+                
+                rsa.PersistKeyInCsp = false;
+                string privateKey = ConvertPrivateKeyToPEM(rsa);
+                string publicKey = ConvertPublicKeyToOpenSSH(rsa);
 
-                    textBoxPrivateKey.Text = privateKey;
-                    textBoxPublicKey.Text = publicKey;
+                textBoxPrivateKey.Text = privateKey;
+                textBoxPublicKey.Text = publicKey;
 
-                    textBoxPrivateKey.Visibility = Visibility.Visible;
-                    textBoxPublicKey.Visibility = Visibility.Visible;
-                    buttonCopyPrivate.Visibility = Visibility.Visible;
-                    buttonCopyPublic.Visibility = Visibility.Visible;
-                    buttonSavePrivate.Visibility = Visibility.Visible;
+                textBoxPrivateKey.Visibility = Visibility.Visible;
+                textBoxPublicKey.Visibility = Visibility.Visible;
+                buttonCopyPrivate.Visibility = Visibility.Visible;
+                buttonCopyPublic.Visibility = Visibility.Visible;
+                buttonSavePrivate.Visibility = Visibility.Visible;
 
-                    MessageBox.Show("SSH ключи успешно сгенерированы!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
+                MessageBox.Show("SSH ключи успешно сгенерированы!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {

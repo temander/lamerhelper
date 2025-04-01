@@ -14,7 +14,7 @@ namespace LamerHelper.Modules.Optimization
         public string ModuleName => "CacheDeleteModule";
         public string DisplayName => "Очистить кэш обновлений";
         public string Category => "Оптимизация";
-        public string Description => "Очищяет кэш, который накапливается после обновлений.";
+        public string Description => "Очищает кэш, который накапливается после обновлений.";
         public UserControl GetModuleControl() => this;
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -22,7 +22,7 @@ namespace LamerHelper.Modules.Optimization
             try
             {
                 Process.Start("net", "stop wuauserv");
-                Process.Start("cmd.exe", "/c cd C:\\Windows\\SoftwareDistribution & del /f /s /q Download");
+                Process.Start("cmd.exe", @"/c cd C:\Windows\SoftwareDistribution & del /f /s /q Download");
                 Process.Start("net", "start wuauserv");
                 MessageBox.Show("Кэш обновлений Windows успешно очищен!", "Оптимизация", MessageBoxButton.OK, MessageBoxImage.Information);
             }

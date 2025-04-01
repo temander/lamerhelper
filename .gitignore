@@ -2,7 +2,8 @@ packages/
 bin/
 obj/
 
-.vs
-.vscode
+.vs/
+.vscode/
+.idea/
 
 desktop.ini

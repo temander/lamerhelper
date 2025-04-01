@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LamerHelper"
         xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
         mc:Ignorable="d"
         ui:WindowHelper.UseModernWindowStyle="True"
@@ -11,7 +10,7 @@
         WindowStartupLocation="CenterScreen"
         Title="LamerHelper" Height="600" Width="900"
         Loaded="Window_Loaded">
-    <ui:NavigationView x:Name="NavigationView_Root" IsPaneOpen="False"
+    <ui:NavigationView x:Name="NavigationViewRoot" IsPaneOpen="False"
                        SelectionChanged="NavigationView_SelectionChanged"
                        PaneDisplayMode="Top">
     </ui:NavigationView>

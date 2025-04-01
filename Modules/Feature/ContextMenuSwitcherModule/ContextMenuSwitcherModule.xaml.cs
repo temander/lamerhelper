@@ -26,15 +26,13 @@ namespace LamerHelper.Modules.Feature
         {
             try
             {
-                using (var key = Registry.CurrentUser.OpenSubKey(RegistryKeyPath))
-                {
-                    bool isWin10Style = key != null && string.IsNullOrEmpty(key.GetValue("")?.ToString());
-                    txtStatus.Text = isWin10Style
-                        ? "Текущий стиль: Windows 10"
-                        : "Текущий стиль: Windows 11";
-                }
+                using var key = Registry.CurrentUser.OpenSubKey(RegistryKeyPath);
+                bool isWin10Style = key != null && string.IsNullOrEmpty(key.GetValue("")?.ToString());
+                txtStatus.Text = isWin10Style
+                    ? "Текущий стиль: Windows 10"
+                    : "Текущий стиль: Windows 11";
             }
-            catch (Exception ex) when (ex is SecurityException || ex is UnauthorizedAccessException)
+            catch (Exception ex) when (ex is SecurityException or UnauthorizedAccessException)
             {
                 MessageBox.Show("Требуются права администратора!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -46,10 +44,8 @@ namespace LamerHelper.Modules.Feature
             {
                 if (win10Style)
                 {
-                    using (var key = Registry.CurrentUser.CreateSubKey(RegistryKeyPath, RegistryKeyPermissionCheck.ReadWriteSubTree))
-                    {
-                        key.SetValue("", "", RegistryValueKind.String);
-                    }
+                    using var key = Registry.CurrentUser.CreateSubKey(RegistryKeyPath, RegistryKeyPermissionCheck.ReadWriteSubTree);
+                    key.SetValue("", "", RegistryValueKind.String);
                 }
                 else
                 {
@@ -57,7 +53,7 @@ namespace LamerHelper.Modules.Feature
                 }
 
                 Process[] explorer = Process.GetProcessesByName("explorer");
-                foreach (Process process in explorer)
+                foreach (var process in explorer)
                 {
                     process.Kill();
                 }

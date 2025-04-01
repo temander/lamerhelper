@@ -31,7 +31,7 @@ namespace LamerHelper.Modules.Feature
 
             string apiUrl = $"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={Uri.EscapeDataString(inputText)}";
 
-            using (HttpClient client = new HttpClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
@@ -68,37 +68,33 @@ namespace LamerHelper.Modules.Feature
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            if (imageQR.Source != null)
+            if (imageQR.Source == null) return;
+            
+            SaveFileDialog saveDialog = new SaveFileDialog
             {
-                SaveFileDialog saveDialog = new SaveFileDialog
-                {
-                    Filter = "PNG Image|*.png",
-                    FileName = "qrcode.png"
-                };
+                Filter = "PNG Image|*.png",
+                FileName = "qrcode.png"
+            };
 
-                if (saveDialog.ShowDialog() == true)
-                {
-                    var encoder = new PngBitmapEncoder();
-                    encoder.Frames.Add(BitmapFrame.Create((BitmapSource)imageQR.Source));
+            if (saveDialog.ShowDialog() != true) return;
+            
+            var encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create((BitmapSource)imageQR.Source));
 
-                    using (var stream = saveDialog.OpenFile())
-                    {
-                        encoder.Save(stream);
-                    }
-
-                    MessageBox.Show("QR-код сохранен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
+            using (var stream = saveDialog.OpenFile())
+            {
+                encoder.Save(stream);
             }
+
+            MessageBox.Show("QR-код сохранен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void ButtonCopy_Click(object sender, RoutedEventArgs e)
         {
-            if (imageQR.Source != null)
-            {
-                BitmapSource bitmapSource = (BitmapSource)imageQR.Source;
-                Clipboard.SetImage(bitmapSource);
-                MessageBox.Show("QR-код скопирован в буфер обмена!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            if (imageQR.Source == null) return;
+            BitmapSource bitmapSource = (BitmapSource)imageQR.Source;
+            Clipboard.SetImage(bitmapSource);
+            MessageBox.Show("QR-код скопирован в буфер обмена!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

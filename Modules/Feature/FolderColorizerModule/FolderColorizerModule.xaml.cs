@@ -36,34 +36,35 @@ namespace LamerHelper.Modules.Feature
                     Uri resourceUri = new(resourceFile, UriKind.Absolute);
 
                     StreamResourceInfo resourceStream = Application.GetResourceStream(resourceUri);
-                    if (resourceStream != null)
-                    {
-                        string destinationPath = Path.Combine(targetDirectory, iconName);
-                        using FileStream fileStream = new(destinationPath, FileMode.Create, FileAccess.Write);
-                        resourceStream.Stream.CopyTo(fileStream);
-                    }
+                    if (resourceStream == null) continue;
+                    
+                    string destinationPath = Path.Combine(targetDirectory, iconName);
+                    using FileStream fileStream = new(destinationPath, FileMode.Create, FileAccess.Write);
+                    resourceStream.Stream.CopyTo(fileStream);
                 }
 
                 string scriptPath = Path.Combine(targetDirectory, "change_folder_icon.ps1");
-                string psScript = @"param(
-    [string]$iconColor,
-    [string]$folderPath
-)
-$docPath = [Environment]::GetFolderPath(""MyDocuments"")
-$iconFolder = ""$docPath\lamerhelper\Folders""
-$iconPath = Join-Path $iconFolder ""$iconColor.ico""
-$desktopIniPath = Join-Path $folderPath ""desktop.ini""
-if (Test-Path $desktopIniPath) {
-    attrib -h -s $desktopIniPath
-    Remove-Item $desktopIniPath -Force
-}
-@""
-[.ShellClassInfo]
-IconResource=$iconPath,0
-""@ | Out-File -FilePath $desktopIniPath -Encoding Unicode
-attrib +h +s $desktopIniPath
-attrib +r $folderPath
-Stop-Process -Name explorer -Force";
+                string psScript = """
+                                  param(
+                                      [string]$iconColor,
+                                      [string]$folderPath
+                                  )
+                                  $docPath = [Environment]::GetFolderPath("MyDocuments")
+                                  $iconFolder = "$docPath\lamerhelper\Folders"
+                                  $iconPath = Join-Path $iconFolder "$iconColor.ico"
+                                  $desktopIniPath = Join-Path $folderPath "desktop.ini"
+                                  if (Test-Path $desktopIniPath) {
+                                      attrib -h -s $desktopIniPath
+                                      Remove-Item $desktopIniPath -Force
+                                  }
+                                  @"
+                                  [.ShellClassInfo]
+                                  IconResource=$iconPath,0
+                                  "@ | Out-File -FilePath $desktopIniPath -Encoding Unicode
+                                  attrib +h +s $desktopIniPath
+                                  attrib +r $folderPath
+                                  Stop-Process -Name explorer -Force
+                                  """;
 
                 File.WriteAllText(scriptPath, psScript, System.Text.Encoding.UTF8);
 
@@ -91,7 +92,7 @@ Stop-Process -Name explorer -Force";
                 }
 
                 string[] colors = ["red", "green", "purple", "blue", "default", "orange"];
-                foreach (string color in colors)
+                foreach (var color in colors)
                 {
                     string colorKey = $@"{menuKey}\shell\{color}";
                     using (RegistryKey key = Registry.ClassesRoot.CreateSubKey(colorKey))
@@ -163,13 +164,12 @@ Stop-Process -Name explorer -Force";
                 using RegistryKey? shellIconCache = Registry.CurrentUser.OpenSubKey(
                     @"Software\Microsoft\Windows\CurrentVersion\Explorer\ShellIconOverlayIdentifiers",
                     true);
-                if (shellIconCache != null)
+                if (shellIconCache == null) return;
+                
+                foreach (var subKey in shellIconCache.GetSubKeyNames()
+                             .Where(name => name.StartsWith("LamerHelperIcon")))
                 {
-                    foreach (string subKey in shellIconCache.GetSubKeyNames()
-                        .Where(name => name.StartsWith("LamerHelperIcon")))
-                    {
-                        shellIconCache.DeleteSubKeyTree(subKey);
-                    }
+                    shellIconCache.DeleteSubKeyTree(subKey);
                 }
             }
             catch (Exception ex)

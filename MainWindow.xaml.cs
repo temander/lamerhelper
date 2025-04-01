@@ -20,13 +20,12 @@ namespace LamerHelper
         {
             LoadModules();
 
-            if (NavigationView_Root.MenuItems.Count > 0)
+            if (NavigationViewRoot.MenuItems.Count <= 0) return;
+            
+            NavigationViewRoot.SelectedItem = NavigationViewRoot.MenuItems[0];
+            if (NavigationViewRoot.MenuItems[0] is NavigationViewItem firstItem)
             {
-                NavigationView_Root.SelectedItem = NavigationView_Root.MenuItems[0];
-                if (NavigationView_Root.MenuItems[0] is NavigationViewItem firstItem)
-                {
-                    NavigationView_Root.Content = _categoryContents[firstItem.Tag.ToString()];
-                }
+                NavigationViewRoot.Content = _categoryContents[firstItem.Tag.ToString()];
             }
         }
 
@@ -84,17 +83,17 @@ namespace LamerHelper
                     Tag = group.Key
                 };
 
-                NavigationView_Root.MenuItems.Add(navItem);
+                NavigationViewRoot.MenuItems.Add(navItem);
             }
         }
 
         private void NavigationView_SelectionChanged(object sender, NavigationViewSelectionChangedEventArgs args)
         {
-            if (NavigationView_Root.SelectedItem is NavigationViewItem navItem &&
+            if (NavigationViewRoot.SelectedItem is NavigationViewItem navItem &&
                 navItem.Tag is string category &&
                 _categoryContents.TryGetValue(category, out UIElement? content))
             {
-                NavigationView_Root.Content = content;
+                NavigationViewRoot.Content = content;
             }
         }
     }
