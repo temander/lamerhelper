@@ -2,18 +2,12 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
-             xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
              Height="Auto" Width="Auto">
     <Grid>
-        <ikw:SimpleStackPanel Spacing="10">
-            <Button Click="Button_ClickEnable">
-                <ui:IconAndText Icon="{x:Static ui:SegoeFluentIcons.Add}"
-                                Content="Включить (требуются права администратора)"/>
-            </Button>
-            <Button Click="Button_ClickDisable">
-                <ui:IconAndText Icon="{x:Static ui:SegoeFluentIcons.Remove}"
-                                Content="Выключить (требуются права администратора)"/>
-            </Button>
-        </ikw:SimpleStackPanel>
+        <ui:ToggleSwitch x:Name="toggleSwitch"
+                         Header="Требуются права администратора"
+                         OnContent="Вкл"
+                         OffContent="Выкл"
+                         Toggled="ToggleSwitch_Toggled"/>
     </Grid>
 </UserControl>
