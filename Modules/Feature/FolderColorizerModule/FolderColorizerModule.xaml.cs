@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Resources;
 
 namespace LamerHelper.Modules.Feature
 {
