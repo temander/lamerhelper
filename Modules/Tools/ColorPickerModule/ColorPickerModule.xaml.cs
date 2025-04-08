@@ -13,7 +13,7 @@ namespace LamerHelper.Modules.Tools
         public string ModuleName => "ColorPickerModule";
         public string DisplayName => "Цветоподборщик";
         public string Category => "Инструменты";
-        public string Description => "Позволяет выбрать цвет с любой точки экрана и скопировать его значение";
+        public string Description => "Нажмите кнопку 'Выбрать цвет', затем перемещайте курсор для предпросмотра и нажмите левую кнопку мыши для захвата цвета. Нажмите правую – чтобы отменить";
         public UserControl GetModuleControl() => this;
 
         private const int WhMouseLl = 14;

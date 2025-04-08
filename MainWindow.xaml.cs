@@ -1,4 +1,7 @@
 ﻿using LamerHelper.Modules;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -9,7 +12,7 @@ namespace LamerHelper
     public partial class MainWindow : Window
     {
         // Словарь для хранения содержимого для каждой категории
-        private readonly Dictionary<string, UIElement> _categoryContents = [];
+        private readonly Dictionary<string, UIElement> _categoryContents = new();
 
         public MainWindow()
         {
@@ -20,8 +23,9 @@ namespace LamerHelper
         {
             LoadModules();
 
-            if (NavigationViewRoot.MenuItems.Count <= 0) return;
-            
+            if (NavigationViewRoot.MenuItems.Count <= 0)
+                return;
+
             NavigationViewRoot.SelectedItem = NavigationViewRoot.MenuItems[0];
             if (NavigationViewRoot.MenuItems[0] is NavigationViewItem firstItem)
             {
@@ -35,6 +39,7 @@ namespace LamerHelper
             List<IModule> modules = ModuleLoader.LoadModules(configPath);
 
             var groupedModules = modules.GroupBy(m => m.Category);
+
             foreach (var group in groupedModules)
             {
                 ScrollViewer scrollViewer = new()
@@ -42,36 +47,68 @@ namespace LamerHelper
                     VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
                 };
 
-                StackPanel stackPanel = new() { Margin = new Thickness(10) };
+                StackPanel stackPanel = new()
+                {
+                    Margin = new Thickness(20, 10, 20, 10),
+                    Orientation = Orientation.Vertical
+                };
 
                 foreach (var module in group)
                 {
-                    TextBlock headerText = new()
+                    // Создаем заголовок с Expander
+                    Expander expander = new()
                     {
-                        Text = module.DisplayName,
-                        FontSize = 16,
-                        FontWeight = FontWeights.Bold,
-                        Margin = new Thickness(6, 0, 0, 6)
+                        Header = new TextBlock
+                        {
+                            Text = module.DisplayName,
+                            FontSize = 16,
+                            FontWeight = FontWeights.SemiBold,
+                            Margin = new Thickness(4),
+                        },
+                        IsExpanded = false,
+                        Background = new SolidColorBrush(Color.FromRgb(34, 34, 34)),
+                        BorderBrush = new SolidColorBrush(Color.FromRgb(55, 55, 55)),
+                        BorderThickness = new Thickness(1),
+                        Padding = new Thickness(10)
                     };
+
+                    StackPanel contentPanel = new()
+                    {
+                        Orientation = Orientation.Vertical,
+                        Margin = new Thickness(0)
+                    };
+
+                    if (!string.IsNullOrWhiteSpace(module.Description))
+                    {
+                        TextBlock description = new()
+                        {
+                            Text = module.Description,
+                            FontSize = 14,
+                            Foreground = new SolidColorBrush(Color.FromRgb(160, 160, 160)),
+                            TextWrapping = TextWrapping.Wrap,
+                            Margin = new Thickness(0, -12, 0, 12)
+                        };
+                        contentPanel.Children.Add(description);
+                    }
 
                     UserControl moduleControl = module.GetModuleControl();
-                    moduleControl.Margin = new Thickness(4);
+                    moduleControl.Margin = new Thickness(0, 0, 0, 4);
+                    contentPanel.Children.Add(moduleControl);
 
-                    StackPanel modulePanel = new();
-                    modulePanel.Children.Add(headerText);
-                    modulePanel.Children.Add(moduleControl);
+                    expander.Content = contentPanel;
 
-                    Border border = new()
+                    Border card = new()
                     {
-                        BorderBrush = Brushes.Gray,
+                        Background = new SolidColorBrush(Color.FromRgb(28, 28, 28)),
+                        CornerRadius = new CornerRadius(12),
+                        BorderBrush = new SolidColorBrush(Color.FromRgb(64, 64, 64)),
                         BorderThickness = new Thickness(1),
-                        CornerRadius = new CornerRadius(5),
-                        Margin = new Thickness(0, 0, 0, 10),
-                        Padding = new Thickness(5, 6, 5, 5),
-                        Child = modulePanel
+                        Margin = new Thickness(0, 0, 0, 14),
+                        Child = expander,
+                        Padding = new Thickness(6)
                     };
 
-                    stackPanel.Children.Add(border);
+                    stackPanel.Children.Add(card);
                 }
 
                 scrollViewer.Content = stackPanel;
