@@ -51,8 +51,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Modules\Tools\" />
-  </ItemGroup>
-
 </Project>
