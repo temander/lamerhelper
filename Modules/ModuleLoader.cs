@@ -30,6 +30,7 @@ namespace LamerHelper.Modules
             string json = File.ReadAllText(configPath);
             ModulesConfig? config = JsonConvert.DeserializeObject<ModulesConfig>(json);
 
+            if (config?.Modules == null) return modules;
             foreach (var moduleInfo in config.Modules)
             {
                 try
@@ -42,6 +43,7 @@ namespace LamerHelper.Modules
                         string? assemblyName = Assembly.GetExecutingAssembly().FullName;
                         moduleType = Type.GetType($"{moduleInfo.Type}, {assemblyName}");
                     }
+
                     if (moduleType == null)
                         continue;
 
@@ -51,9 +53,11 @@ namespace LamerHelper.Modules
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Ошибка загрузки модуля {moduleInfo.ModuleName}: {ex.Message}", "Модуль", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"Ошибка загрузки модуля {moduleInfo.ModuleName}: {ex.Message}", "Модуль",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+
             return modules;
         }
     }

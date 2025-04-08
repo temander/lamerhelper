@@ -22,7 +22,7 @@
       "ModuleName": "QrCreatorModule",
       "DisplayName": "Создание QR-кода из любой ссылки",
       "Category": "Фишка",
-      "Type": "LamerHelper.Modules.Feature.QrCreatorModule"
+      "Type": "LamerHelper.Modules.Tools.QrCreatorModule"
     },
     {
       "ModuleName": "CacheDeleteModule",

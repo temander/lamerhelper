@@ -12,7 +12,7 @@ namespace LamerHelper
     public partial class MainWindow : Window
     {
         // Словарь для хранения содержимого для каждой категории
-        private readonly Dictionary<string, UIElement> _categoryContents = new();
+        private readonly Dictionary<string?, UIElement> _categoryContents = new();
 
         public MainWindow()
         {
@@ -38,7 +38,7 @@ namespace LamerHelper
             string configPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ModuleConfig.json");
             List<IModule> modules = ModuleLoader.LoadModules(configPath);
 
-            var groupedModules = modules.GroupBy(m => m.Category);
+            IEnumerable<IGrouping<string?, IModule>> groupedModules = modules.GroupBy(m => m.Category);
 
             foreach (var group in groupedModules)
             {
