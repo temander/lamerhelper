@@ -34,9 +34,6 @@
                     <Button x:Name="ButtonCopyRgb" Content="Копировать RGB" Click="ButtonCopyRgb_Click"/>
                 </StackPanel>
             </Grid>
-            <TextBlock x:Name="TextBlockInstructions" 
-                       Text="Нажмите кнопку 'Выбрать цвет', затем перемещайте курсор для предпросмотра и нажмите левую кнопку мыши для захвата цвета. Нажмите правую – чтобы отменить."
-                       TextWrapping="Wrap"/>
         </ikw:SimpleStackPanel>
     </Grid>
 </UserControl>
