@@ -52,7 +52,7 @@
       "ModuleName": "ColorPickerModule",
       "DisplayName": "Цветоподборщик",
       "Category": "Фишка",
-      "Type": "LamerHelper.Modules.Feature.ColorPickerModule"
+      "Type": "LamerHelper.Modules.Tools.ColorPickerModule"
     }
   ]
 }
