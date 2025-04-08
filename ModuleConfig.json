@@ -47,6 +47,12 @@
       "DisplayName": "Переключатель контекстного меню",
       "Category": "Фишка",
       "Type": "LamerHelper.Modules.Feature.ContextMenuSwitcherModule"
+    },
+    {
+      "ModuleName": "ColorPickerModule",
+      "DisplayName": "Цветоподборщик",
+      "Category": "Фишка",
+      "Type": "LamerHelper.Modules.Tools.ColorPickerModule"
     }
   ]
 }
