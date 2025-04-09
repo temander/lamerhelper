@@ -4,9 +4,9 @@
              xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
              Height="Auto" Width="Auto">
     <StackPanel>
-        <TextBlock x:Name="txtStatus" 
+        <TextBlock x:Name="TxtStatus" 
                    Margin="0,0,0,8"/>
-        <ui:ToggleSwitch x:Name="toggleSwitch"
+        <ui:ToggleSwitch x:Name="ToggleSwitch"
                          Header="Требуются права администратора"
                          OnContent="Windows 10"
                          OffContent="Windows 11"

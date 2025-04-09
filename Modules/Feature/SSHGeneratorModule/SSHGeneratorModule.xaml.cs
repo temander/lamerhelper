@@ -8,8 +8,8 @@ namespace LamerHelper.Modules.Feature
 {
     public partial class SSHGeneratorModule : UserControl, IModule
     {
-        private string _privateKeyPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".ssh", "id_rsa");
-        private string _publicKeyPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".ssh", "id_rsa.pub");
+        private readonly string _privateKeyPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".ssh", "id_rsa");
+        private readonly string _publicKeyPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".ssh", "id_rsa.pub");
 
         public SSHGeneratorModule()
         {
@@ -32,14 +32,14 @@ namespace LamerHelper.Modules.Feature
                 string privateKey = ConvertPrivateKeyToPEM(rsa);
                 string publicKey = ConvertPublicKeyToOpenSSH(rsa);
 
-                textBoxPrivateKey.Text = privateKey;
+                TextBoxPrivateKey.Text = privateKey;
                 textBoxPublicKey.Text = publicKey;
 
-                textBoxPrivateKey.Visibility = Visibility.Visible;
+                TextBoxPrivateKey.Visibility = Visibility.Visible;
                 textBoxPublicKey.Visibility = Visibility.Visible;
-                buttonCopyPrivate.Visibility = Visibility.Visible;
-                buttonCopyPublic.Visibility = Visibility.Visible;
-                buttonSavePrivate.Visibility = Visibility.Visible;
+                ButtonCopyPrivate.Visibility = Visibility.Visible;
+                ButtonCopyPublic.Visibility = Visibility.Visible;
+                ButtonSavePrivate.Visibility = Visibility.Visible;
 
                 MessageBox.Show("SSH ключи успешно сгенерированы!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -69,7 +69,7 @@ namespace LamerHelper.Modules.Feature
 
         private void ButtonCopyPrivate_Click(object sender, RoutedEventArgs e)
         {
-            Clipboard.SetText(textBoxPrivateKey.Text);
+            Clipboard.SetText(TextBoxPrivateKey.Text);
             MessageBox.Show("Приватный ключ скопирован!", "Готово", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
@@ -83,7 +83,7 @@ namespace LamerHelper.Modules.Feature
                     Directory.CreateDirectory(sshFolderPath);
                 }
 
-                File.WriteAllText(_privateKeyPath, textBoxPrivateKey.Text);
+                File.WriteAllText(_privateKeyPath, TextBoxPrivateKey.Text);
                 File.WriteAllText(_publicKeyPath, textBoxPublicKey.Text);
 
                 // Настраиваем права доступа (важно для корректной работы SSH)

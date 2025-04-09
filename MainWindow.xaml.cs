@@ -12,7 +12,7 @@ namespace LamerHelper
     public partial class MainWindow : Window
     {
         // Словарь для хранения содержимого для каждой категории
-        private readonly Dictionary<string?, UIElement> _categoryContents = new();
+        private readonly Dictionary<string, UIElement> _categoryContents = new();
 
         public MainWindow()
         {
@@ -29,7 +29,7 @@ namespace LamerHelper
             NavigationViewRoot.SelectedItem = NavigationViewRoot.MenuItems[0];
             if (NavigationViewRoot.MenuItems[0] is NavigationViewItem firstItem)
             {
-                NavigationViewRoot.Content = _categoryContents[firstItem.Tag.ToString()];
+                NavigationViewRoot.Content = _categoryContents[firstItem.Tag.ToString() ?? string.Empty];
             }
         }
 
@@ -112,6 +112,7 @@ namespace LamerHelper
                 }
 
                 scrollViewer.Content = stackPanel;
+                if (group.Key == null) continue;
                 _categoryContents[group.Key] = scrollViewer;
 
                 NavigationViewItem navItem = new()

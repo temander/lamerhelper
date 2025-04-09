@@ -17,7 +17,7 @@ namespace LamerHelper.Modules.Tools
         public string ModuleName => "QrCreatorModule";
         public string DisplayName => "Создание QR-кода из любого текста";
         public string Category => "Инструменты";
-        public string Description => "Позволяет создать QR-код из любого текста с возможностью выбора размера";
+        public string Description => "Позволяет создать QR-код из любого текста с возможностью выбора размера.";
         public UserControl GetModuleControl() => this;
 
         private async void ButtonGenerate_Click(object sender, RoutedEventArgs e)

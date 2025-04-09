@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ComboBox x:Name="colorComboBox"
+        <ComboBox x:Name="ColorComboBox"
                   Grid.Column="0"
                   Grid.Row="0"
                   Margin="0,0,10,0"
@@ -27,7 +27,7 @@
             <ui:IconAndText Icon="{x:Static ui:SegoeFluentIcons.Color}" Content="Изменить цвет"/>
         </Button>
 
-        <TextBox x:Name="customColorTextBox"
+        <TextBox x:Name="CustomColorTextBox"
                  Grid.Column="0"
                  Grid.Row="1"
                  Grid.ColumnSpan="2"
@@ -35,7 +35,7 @@
                  Margin="0,10,0,0"
                  TextChanged="CustomColorTextBox_TextChanged" />
 
-        <Border x:Name="colorPreview"
+        <Border x:Name="ColorPreview"
                 Grid.Column="0"
                 Grid.Row="2"
                 Grid.ColumnSpan="2"

@@ -10,15 +10,15 @@ namespace LamerHelper.Modules.Feature
     {
         private const string ToggleStateRegistryKey = @"Software\LamerHelper\FolderColorizer";
         private const string ToggleStateRegistryValue = "ToggleState";
-        private bool isInitializing;
+        private readonly bool _isInitializing;
 
         public FolderColorizerModule()
         {
             InitializeComponent();
-            isInitializing = true;
+            _isInitializing = true;
             LoadToggleState();
             CheckCurrentState(); 
-            isInitializing = false;
+            _isInitializing = false;
         }
 
         public string ModuleName => "FolderColorizerModule";
@@ -31,7 +31,7 @@ namespace LamerHelper.Modules.Feature
         {
             string menuKey = @"Directory\shell\LamerHelper.ColorizeFolder";
             using var key = Registry.ClassesRoot.OpenSubKey(menuKey);
-            toggleSwitch.IsOn = key != null;
+            ToggleSwitch.IsOn = key != null;
         }
 
         private void SaveToggleState(bool state)
@@ -52,11 +52,9 @@ namespace LamerHelper.Modules.Feature
             try
             {
                 using var key = Registry.CurrentUser.OpenSubKey(ToggleStateRegistryKey);
-                if (key != null)
-                {
-                    object value = key.GetValue(ToggleStateRegistryValue, 0);
-                    toggleSwitch.IsOn = (int)value == 1;
-                }
+                if (key == null) return;
+                object value = key.GetValue(ToggleStateRegistryValue, 0);
+                ToggleSwitch.IsOn = (int)value == 1;
             }
             catch (Exception ex)
             {
@@ -66,9 +64,9 @@ namespace LamerHelper.Modules.Feature
 
         private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
-            if (isInitializing) return;
+            if (_isInitializing) return;
 
-            if (toggleSwitch.IsOn)
+            if (ToggleSwitch.IsOn)
             {
                 try
                 {
@@ -123,7 +121,7 @@ namespace LamerHelper.Modules.Feature
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    toggleSwitch.IsOn = false;
+                    ToggleSwitch.IsOn = false;
                 }
             }
             else
@@ -154,7 +152,7 @@ namespace LamerHelper.Modules.Feature
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Ошибка отключения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    toggleSwitch.IsOn = true;
+                    ToggleSwitch.IsOn = true;
                 }
             }
         }
@@ -178,7 +176,7 @@ namespace LamerHelper.Modules.Feature
                 foreach (var color in colors)
                 {
                     string colorKey = $@"{menuKey}\shell\{color}";
-                    using (RegistryKey key = Registry.ClassesRoot.CreateSubKey(colorKey))
+                    using (var key = Registry.ClassesRoot.CreateSubKey(colorKey))
                     {
                         key.SetValue("MUIVerb", color);
                         key.SetValue("Icon", Path.Combine(targetDirectory, $"{color}.ico"));
@@ -205,7 +203,7 @@ namespace LamerHelper.Modules.Feature
             {
                 const string menuKey = @"Directory\shell\LamerHelper.ColorizeFolder";
 
-                using (RegistryKey? key = Registry.ClassesRoot.OpenSubKey(menuKey, true))
+                using (var key = Registry.ClassesRoot.OpenSubKey(menuKey, true))
                 {
                     if (key != null)
                     {

@@ -4,7 +4,7 @@
              xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
              Height="Auto" Width="Auto">
     <Grid>
-        <ui:ToggleSwitch x:Name="toggleSwitch"
+        <ui:ToggleSwitch x:Name="ToggleSwitch"
                          Header="Требуются права администратора"
                          OnContent="Вкл"
                          OffContent="Выкл"

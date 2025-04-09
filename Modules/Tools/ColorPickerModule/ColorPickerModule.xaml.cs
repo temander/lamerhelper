@@ -13,7 +13,7 @@ namespace LamerHelper.Modules.Tools
         public string ModuleName => "ColorPickerModule";
         public string DisplayName => "Цветоподборщик";
         public string Category => "Инструменты";
-        public string Description => "Нажмите кнопку 'Выбрать цвет', затем перемещайте курсор для предпросмотра и нажмите левую кнопку мыши для захвата цвета. Нажмите правую – чтобы отменить";
+        public string Description => "Нажмите кнопку 'Выбрать цвет', затем перемещайте курсор для предпросмотра и нажмите левую кнопку мыши для захвата цвета. Нажмите правую – чтобы отменить.";
         public UserControl GetModuleControl() => this;
 
         private const int WhMouseLl = 14;
@@ -40,8 +40,8 @@ namespace LamerHelper.Modules.Tools
         private IntPtr SetHook(LowLevelMouseProc proc)
         {
             using Process curProcess = Process.GetCurrentProcess();
-            using ProcessModule curModule = curProcess.MainModule;
-            return SetWindowsHookEx(WhMouseLl, proc, GetModuleHandle(curModule.ModuleName), 0);
+            using ProcessModule? curModule = curProcess.MainModule;
+            return SetWindowsHookEx(WhMouseLl, proc, GetModuleHandle(curModule?.ModuleName ?? string.Empty), 0);
         }
 
         private IntPtr MouseHookCallback(int nCode, IntPtr wParam, IntPtr lParam)
@@ -69,7 +69,7 @@ namespace LamerHelper.Modules.Tools
             return CallNextHookEx(_hookID, nCode, wParam, lParam);
         }
 
-        private DispatcherTimer _colorUpdateTimer;
+        private DispatcherTimer? _colorUpdateTimer;
 
         public ColorPickerModule()
         {
@@ -80,10 +80,10 @@ namespace LamerHelper.Modules.Tools
             _mouseProc = MouseHookCallback;
         }
 
-        private Window _colorInfoPopup;
-        private Border _popupColorSample;
-        private TextBlock _popupHexText;
-        private TextBlock _popupRgbText;
+        private Window? _colorInfoPopup;
+        private Border? _popupColorSample;
+        private TextBlock? _popupHexText;
+        private TextBlock? _popupRgbText;
 
         private void InitializePopup()
         {
@@ -137,10 +137,10 @@ namespace LamerHelper.Modules.Tools
         private void ButtonPickColor_Click(object sender, RoutedEventArgs e)
         {
             _hookID = SetHook(_mouseProc);
-            _colorUpdateTimer.Start();
+            _colorUpdateTimer?.Start();
             Mouse.OverrideCursor = Cursors.Cross;
             ColorInfoPanel.Visibility = Visibility.Collapsed;
-            _colorInfoPopup.Show();
+            _colorInfoPopup?.Show();
         }
 
         private void ButtonCopyHex_Click(object sender, RoutedEventArgs e)
@@ -159,14 +159,14 @@ namespace LamerHelper.Modules.Tools
 
         private void StopColorPicking()
         {
-            _colorUpdateTimer.Stop();
+            _colorUpdateTimer?.Stop();
             Mouse.OverrideCursor = null;
             if (_hookID != IntPtr.Zero)
             {
                 UnhookWindowsHookEx(_hookID);
                 _hookID = IntPtr.Zero;
             }
-            _colorInfoPopup.Hide();
+            _colorInfoPopup?.Hide();
         }
 
         private Color GetColorAtCursorPosition()
@@ -195,9 +195,9 @@ namespace LamerHelper.Modules.Tools
 
         private void UpdatePopupInfo(Color color)
         {
-            _popupColorSample.Background = new SolidColorBrush(color);
-            _popupHexText.Text = $"HEX: {color.R:X2}{color.G:X2}{color.B:X2}";
-            _popupRgbText.Text = $"RGB: {color.R}, {color.G}, {color.B}";
+            if (_popupColorSample != null) _popupColorSample.Background = new SolidColorBrush(color);
+            if (_popupHexText != null) _popupHexText.Text = $"HEX: {color.R:X2}{color.G:X2}{color.B:X2}";
+            if (_popupRgbText != null) _popupRgbText.Text = $"RGB: {color.R}, {color.G}, {color.B}";
         }
 
         private void UpdateColorDisplay(Color color)
@@ -209,30 +209,29 @@ namespace LamerHelper.Modules.Tools
 
         private void UpdatePopupPosition()
         {
-            if (NativeMethods.GetCursorPos(out NativeMethods.Point p))
+            if (!NativeMethods.GetCursorPos(out var p)) return;
+            var cursorPoint = new Point(p.X, p.Y);
+            var source = PresentationSource.FromVisual(Application.Current.MainWindow);
+            if (source != null)
             {
-                Point cursorPoint = new Point(p.X, p.Y);
-                PresentationSource source = PresentationSource.FromVisual(Application.Current.MainWindow);
-                if (source != null)
-                {
-                    Matrix transform = source.CompositionTarget.TransformFromDevice;
-                    cursorPoint = transform.Transform(cursorPoint);
-                }
-
-                double offsetX = 20;
-                double offsetY = 20;
-
-                double screenWidth = SystemParameters.PrimaryScreenWidth;
-                double screenHeight = SystemParameters.PrimaryScreenHeight;
-
-                if (cursorPoint.X + _colorInfoPopup.Width + offsetX > screenWidth)
-                    offsetX = -(_colorInfoPopup.Width + 10);
-                if (cursorPoint.Y + _colorInfoPopup.Height + offsetY > screenHeight)
-                    offsetY = -(_colorInfoPopup.Height + 10);
-
-                _colorInfoPopup.Left = cursorPoint.X + offsetX;
-                _colorInfoPopup.Top = cursorPoint.Y + offsetY;
+                var transform = source.CompositionTarget.TransformFromDevice;
+                cursorPoint = transform.Transform(cursorPoint);
             }
+
+            double offsetX = 20;
+            double offsetY = 20;
+
+            double screenWidth = SystemParameters.PrimaryScreenWidth;
+            double screenHeight = SystemParameters.PrimaryScreenHeight;
+
+            if (_colorInfoPopup != null && cursorPoint.X + _colorInfoPopup.Width + offsetX > screenWidth)
+                offsetX = -(_colorInfoPopup.Width + 10);
+            if (_colorInfoPopup != null && cursorPoint.Y + _colorInfoPopup.Height + offsetY > screenHeight)
+                offsetY = -(_colorInfoPopup.Height + 10);
+
+            if (_colorInfoPopup == null) return;
+            _colorInfoPopup.Left = cursorPoint.X + offsetX;
+            _colorInfoPopup.Top = cursorPoint.Y + offsetY;
         }
 
         internal static class NativeMethods
@@ -248,13 +247,13 @@ namespace LamerHelper.Modules.Tools
             public static extern bool GetCursorPos(out Point lpPoint);
 
             [DllImport("gdi32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-            public static extern int GetPixel(IntPtr hDC, int x, int y);
+            public static extern int GetPixel(IntPtr hDc, int x, int y);
 
             [DllImport("user32.dll")]
             public static extern IntPtr GetDC(IntPtr hWnd);
 
             [DllImport("user32.dll")]
-            public static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
+            public static extern int ReleaseDC(IntPtr hWnd, IntPtr hDc);
         }
     }
 }

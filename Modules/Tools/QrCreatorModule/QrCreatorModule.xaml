@@ -40,12 +40,16 @@
                         Visibility="Collapsed"
                         x:Name="PanelButtons">
                 <Button x:Name="ButtonSave"
-                        Content="Сохранить QR-код"
-                        Click="ButtonSave_Click"/>
+                        Click="ButtonSave_Click">
+                    <ui:IconAndText Icon="{x:Static ui:SegoeFluentIcons.Save}"
+                                    Content="Сохранить"/>
+                </Button>
                 <Button x:Name="ButtonCopy"
-                        Margin="10,0,0,0"
-                        Content="Копировать в буфер"
-                        Click="ButtonCopy_Click"/>
+                        Click="ButtonCopy_Click"
+                        Margin="10,0,0,0">
+                    <ui:IconAndText Icon="{x:Static ui:SegoeFluentIcons.Copy}"
+                                    Content="Копировать в буфер"/>
+                </Button>
             </StackPanel>
         </ikw:SimpleStackPanel>
     </Grid>

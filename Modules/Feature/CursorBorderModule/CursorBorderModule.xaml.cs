@@ -11,7 +11,7 @@ namespace LamerHelper.Modules.Feature
         {
             InitializeComponent();
 
-            colorComboBox.ItemsSource = new ComboBoxColorBorder[]
+            ColorComboBox.ItemsSource = new ComboBoxColorBorder[]
             {
                 new() { Name = "Стандартный", StrokeColor = "0 120 215", BorderColor = "0 102 204" },
                 new() { Name = "Красный", StrokeColor = "240 0 0", BorderColor = "255 0 0" },
@@ -19,7 +19,7 @@ namespace LamerHelper.Modules.Feature
                 new() { Name = "Синий", StrokeColor = "0 0 240", BorderColor = "0 0 255" },
                 new() { Name = "Кастомный цвет", StrokeColor = "custom", BorderColor = "" }
             };
-            colorComboBox.SelectedIndex = 0;
+            ColorComboBox.SelectedIndex = 0;
         }
 
         public string ModuleName => "CursorBorderModule";
@@ -30,33 +30,35 @@ namespace LamerHelper.Modules.Feature
 
         private void ColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (colorComboBox.SelectedItem is ComboBoxColorBorder selectedItem && selectedItem.Name == "Кастомный цвет")
+            if (ColorComboBox.SelectedItem is ComboBoxColorBorder selectedItem && selectedItem.Name == "Кастомный цвет")
             {
-                customColorTextBox.Visibility = Visibility.Visible;
-                UpdateColorPreview(customColorTextBox.Text);
+                CustomColorTextBox.Visibility = Visibility.Visible;
+                UpdateColorPreview(CustomColorTextBox.Text);
             }
             else
             {
-                customColorTextBox.Visibility = Visibility.Collapsed;
-                UpdateColorPreview((colorComboBox.SelectedItem as ComboBoxColorBorder)?.StrokeColor);
+                CustomColorTextBox.Visibility = Visibility.Collapsed;
+                var strokeColor = (ColorComboBox.SelectedItem as ComboBoxColorBorder)?.StrokeColor;
+                if (strokeColor != null)
+                    UpdateColorPreview(strokeColor);
             }
         }
 
         private void CustomColorTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateColorPreview(customColorTextBox.Text);
+            UpdateColorPreview(CustomColorTextBox.Text);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ComboBoxColorBorder? activeOption = colorComboBox.SelectedItem as ComboBoxColorBorder;
+            ComboBoxColorBorder? activeOption = ColorComboBox.SelectedItem as ComboBoxColorBorder;
 
-            string strokeColor = activeOption.StrokeColor;
-            string borderColor = activeOption.BorderColor;
+            string? strokeColor = activeOption?.StrokeColor;
+            string? borderColor = activeOption?.BorderColor;
 
-            if (activeOption.Name == "Кастомный цвет")
+            if (activeOption?.Name == "Кастомный цвет")
             {
-                string customColor = customColorTextBox.Text;
+                string customColor = CustomColorTextBox.Text;
                 if (IsValidColor(customColor))
                 {
                     strokeColor = NormalizeColor(customColor);
@@ -69,8 +71,8 @@ namespace LamerHelper.Modules.Feature
                 }
             }
 
-            ChangeValue("HotTrackingColor", borderColor); // Панель
-            ChangeValue("Hilight", strokeColor); // Обводка
+            if (borderColor != null) ChangeValue("HotTrackingColor", borderColor); // Панель
+            if (strokeColor != null) ChangeValue("Hilight", strokeColor); // Обводка
 
             MessageBox.Show("Новый цвет применился! Перезапустите Windows, чтобы изменения вступили в силу.", "Фишка", MessageBoxButton.OK, MessageBoxImage.Information);
         }
@@ -94,7 +96,7 @@ namespace LamerHelper.Modules.Feature
             }
         }
 
-        private static string NormalizeColor(string color)
+        private static string? NormalizeColor(string color)
         {
             var parts = color.Split([' ', ','], StringSplitOptions.RemoveEmptyEntries);
             return string.Join(" ", parts);
@@ -106,33 +108,33 @@ namespace LamerHelper.Modules.Feature
             {
                 if (IsValidColor(color))
                 {
-                    string normalizedColor = NormalizeColor(color);
-                    var parts = normalizedColor.Split(' ');
-                    byte r = byte.Parse(parts[0]);
-                    byte g = byte.Parse(parts[1]);
-                    byte b = byte.Parse(parts[2]);
+                    string? normalizedColor = NormalizeColor(color);
+                    string?[]? parts = normalizedColor?.Split(' ');
+                    byte r = byte.Parse(parts?[0] ?? string.Empty);
+                    byte g = byte.Parse(parts?[1] ?? string.Empty);
+                    byte b = byte.Parse(parts?[2] ?? string.Empty);
 
                     var brush = new SolidColorBrush(Color.FromRgb(r, g, b));
-                    colorPreview.Background = brush;
+                    ColorPreview.Background = brush;
                 }
                 else
                 {
-                    colorPreview.Background = Brushes.Transparent;
+                    ColorPreview.Background = Brushes.Transparent;
                 }
             }
             catch
             {
-                colorPreview.Background = Brushes.Transparent;
+                ColorPreview.Background = Brushes.Transparent;
             }
         }
 
         // Изменение значения в реестре
-        private static void ChangeValue(string valueName, string newValue)
+        private static void ChangeValue(string valueName, string? newValue)
         {
             try
             {
-                using RegistryKey? key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Colors", true);
-                key?.SetValue(valueName, newValue);
+                using var key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Colors", true);
+                if (newValue != null) key?.SetValue(valueName, newValue);
             }
             catch (Exception ex)
             {
@@ -143,9 +145,9 @@ namespace LamerHelper.Modules.Feature
         // Класс для хранения данных о цветах
         private class ComboBoxColorBorder
         {
-            public string Name { get; set; } = "";
-            public string StrokeColor { get; set; } = "";
-            public string BorderColor { get; set; } = "";
+            public string Name { get; init; } = "";
+            public string? StrokeColor { get; init; } = "";
+            public string? BorderColor { get; init; } = "";
 
             public override string ToString() => $"{Name} (rgb {StrokeColor})";
         }

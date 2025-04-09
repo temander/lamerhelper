@@ -6,8 +6,8 @@
              Height="Auto" Width="Auto">
     <Grid Margin="10">
         <ikw:SimpleStackPanel Spacing="10">
-            <Button x:Name="buttonGenerate"
-                    Click="ButtonGenerate_Click">
+            <Button
+                Click="ButtonGenerate_Click">
                 <ui:IconAndText Icon="{x:Static ui:SegoeFluentIcons.Accept}"
                                 Content="Сгенерировать SSH ключи"/>
             </Button>
@@ -27,7 +27,7 @@
                              TextWrapping="Wrap" 
                              IsReadOnly="True" 
                              Visibility="Collapsed"/>
-                    <Button x:Name="buttonCopyPublic" 
+                    <Button x:Name="ButtonCopyPublic" 
                             Content="Копировать публичный ключ" 
                             Click="ButtonCopyPublic_Click" 
                             Visibility="Collapsed"/>
@@ -37,17 +37,17 @@
 
                 <ikw:SimpleStackPanel Grid.Column="2" Spacing="10">
                     <TextBlock Text="Приватный ключ:" FontWeight="Bold" Margin="0,10,0,0"/>
-                    <TextBox x:Name="textBoxPrivateKey" 
+                    <TextBox x:Name="TextBoxPrivateKey" 
                              AcceptsReturn="True" 
                              Height="150" 
                              TextWrapping="Wrap" 
                              IsReadOnly="True" 
                              Visibility="Collapsed"/>
-                    <Button x:Name="buttonCopyPrivate" 
+                    <Button x:Name="ButtonCopyPrivate" 
                             Content="Копировать приватный ключ" 
                             Click="ButtonCopyPrivate_Click" 
                             Visibility="Collapsed"/>
-                    <Button x:Name="buttonSavePrivate" 
+                    <Button x:Name="ButtonSavePrivate" 
                             Content="Сохранить в системе" 
                             Click="ButtonSavePrivate_Click" 
                             Visibility="Collapsed"/>

@@ -15,7 +15,7 @@ namespace LamerHelper.Modules.Optimization
         public string ModuleName => "ClearTempModule";
         public string DisplayName => "Очистить папку Temp";
         public string Category => "Оптимизация";
-        public string Description => "Очищает временную папку Temp, тем самым освобожая большое количество свободной памяти на диске.";
+        public string Description => "Очищает временную папку Temp, тем самым освобождая большое количество свободной памяти на диске.";
         public UserControl GetModuleControl() => this;
 
         private async void ClearTempModule_Loaded(object sender, RoutedEventArgs e)
@@ -66,8 +66,8 @@ namespace LamerHelper.Modules.Optimization
 
         private void UpdateButtonText(long sizeInBytes)
         {
-            double sizeInMB = sizeInBytes / (1024.0 * 1024.0);
-            this.IconAndText.Content = $"Активировать ({sizeInMB:F1} MB)";
+            double sizeInMb = sizeInBytes / (1024.0 * 1024.0);
+            this.IconAndText.Content = $"Активировать ({sizeInMb:F1} MB)";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
